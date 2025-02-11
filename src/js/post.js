@@ -1,15 +1,17 @@
 const data = [
   {
-    photo: "https://raw.githubusercontent.com/sovannarot/app/main/assets/img/Picsart_24-05-03_20-05-59-822.png",
+    photo:
+      "https://raw.githubusercontent.com/sovannarot/learn/main/assets/img/Picsart_24-05-03_20-05-59-822.png",
     name: "SQ3R Technique",
     date: "03/05/2024",
-    about: "SQ3R Technique​ ជាវិធីរៀនសូត្រម្យ៉ាងដែលប្រើសម្រាប់អោយយើងអាចអានសៀវភៅចងចាំនិងចេះបានប្រសិទ្ធផលខ្ពស់ក្នុងការរៀនដោយអានសៀវភៅ។ វិធីនេះត្រូវបានប្រើដោយសិស្សជាច្រើនដែលចូលចិត្តរៀនតាមការអានសៀវភៅ",
+    about:
+      "SQ3R Technique​ ជាវិធីរៀនសូត្រម្យ៉ាងដែលប្រើសម្រាប់អោយយើងអាចអានសៀវភៅចងចាំនិងចេះបានប្រសិទ្ធផលខ្ពស់ក្នុងការរៀនដោយអានសៀវភៅ។ វិធីនេះត្រូវបានប្រើដោយសិស្សជាច្រើនដែលចូលចិត្តរៀនតាមការអានសៀវភៅ",
     use: "<article>វិធីនេះមាន៥ជំហានត្រូវអនុវត្តតាមគឺ៖</article><article>-ជំហានទី១. ការចង់រៀនពីអត្ថបទ៖ សម្លឹងមើលអត្ថបទ និងស្វែងរកគោលគំនិតសំខាន់ពីអត្ថបទ។​ តើអ្វីដែលខ្ញុំអាចរៀនពីអក្សរទាំងនេះ ?</article><article>-ជំហានទី២. សួរសំណួរ៖​ គិតពីអ្វីដែលអ្នកត្រៀមខ្លួនដឹងពីប្រធានបទ។ តើអ្វីខ្ញុំសង្ឃឹមរៀនពីអក្សរទាំងនេះ ?</article><article>-ជំហានទី៣. ការអាន៖ អានសម្រាប់ឆ្លើយទៅសំណួររបស់អ្នក។</article><article>-ជំហានទី៤. ការសូត្រ៖ ពិចារណាអ្វីអ្នកចង់ចងចាំពីព័ត៏មានលម្អិតនេះ។</article><article>-ជំហានទី៥. ការរំលឹកឡើងវិញ៖ អានឡើងវិញនូវការកត់ត្រារបស់អ្នក និងភ្ជាបើព័ត៏មាននោះជាមួយបទពិសោធន៍របស់អ្នក។</article>",
     bonus: "ចង់បានប្រសិទ្ធល្អត្រូវអនុវត្តដោយយកចិត្តទុកដាក់។",
   },
   {
     photo:
-      "https://raw.githubusercontent.com/sovannarot/app/main/assets/img/feynman.avif",
+      "https://raw.githubusercontent.com/sovannarot/learn/main/assets/img/feynman.avif",
     name: "Feynman Technique",
     date: "18/04/2024",
     about:
@@ -30,7 +32,7 @@ const data = [
   },
   {
     photo:
-      "https://raw.githubusercontent.com/sovannarot/app/main/assets/img/learningpyramid.jpg",
+      "https://raw.githubusercontent.com/sovannarot/learn/main/assets/img/learningpyramid.jpg",
     name: "Learning Pyramid",
     date: "20/04/2024",
     about: "តារាងនិយាយពីកម្រិតភាគរយនៃភាពចងចាំរបស់យើង។",
@@ -39,7 +41,7 @@ const data = [
   },
   {
     photo:
-      "https://raw.githubusercontent.com/sovannarot/app/main/assets/img/flowtime.png",
+      "https://raw.githubusercontent.com/sovannarot/learn/main/assets/img/flowtime.png",
     name: "Flowtime Method",
     date: "21/04/2024",
     about:
@@ -94,7 +96,7 @@ function createpostlayout(name, photo, about, use, bonus, index) {
     <h2>${name}</h2>
     <div style="width: calc(100vw - 300px); height: 25px"></div>
     <button onclick="hidepost(${index})">
-      <img src="https://raw.githubusercontent.com/sovannarot/app/main/assets/img/xmark.svg" alt="" />
+      <img src="https://raw.githubusercontent.com/sovannarot/learn/main/assets/img/xmark.svg" alt="" />
     </button>
   </div>
   <div class="mid">
