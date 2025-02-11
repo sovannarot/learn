@@ -1,0 +1,324 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: Khmer;
+  src: url(https://raw.githubusercontent.com/sovannarot/app/main/assets/font/khmer2.ttf)
+    format("truetype");
+}
+.social-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  text-decoration: none;
+}
+#extrastate a img {
+  width: 30px;
+}
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10svh;
+  border-radius: 13px;
+  gap: 10px;
+}
+#extrastate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#footer h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #e3d004;
+}
+#footer h2 a {
+  color: #f81b1b;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Khmer";
+  background: #2f363e;
+}
+.section-mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100svh;
+  background: #2f363e;
+  flex-direction: column;
+}
+.section-mid #flowtime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  gap: 15px;
+  transform: translateY(-80px);
+}
+.section-mid #flowtime a {
+  text-decoration: none;
+  color: #fee800;
+  font-size: 30px;
+  font-weight: 600;
+}
+.section-mid #flowtime a:nth-child(2) {
+  font-size: 50px;
+  font-weight: 600;
+  color: #f81b1b;
+}
+.section-mid #flowtime button {
+  border: none;
+  background: transparent;
+}
+.section-mid #flowtime button a {
+  font-size: 50px;
+  font-weight: 600;
+}
+.section-mid h3 {
+  color: #04fc43;
+  font-size: 35px;
+  font-weight: 570;
+  transform: translateY(-100px);
+}
+.section-mid #status {
+  position: absolute;
+}
+.section-mid #status h3 {
+  color: #fee800;
+  font-size: 25px;
+  font-weight: 570;
+  margin-top: -90px;
+}
+#reset {
+  position: absolute;
+  font-family: "Khmer";
+  color: #04fc43;
+  background: #592bff;
+  transform: translate(-225px, 70px);
+}
+#clock {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  margin-bottom: 200px;
+}
+#hrDots,
+#minDots,
+#secDots {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  rotate: 90deg;
+}
+#hrDots::before,
+#minDots::before,
+#secDots::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25),
+    10px 10px 70px rgba(0, 0, 0, 0.25), inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+    inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+#hrDots h2,
+#minDots h2,
+#secDots h2 {
+  position: absolute;
+  text-align: center;
+  transform: rotate(-90deg);
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 4em;
+  color: var(--clr);
+}
+#hrDots h2 span,
+#minDots h2 span,
+#secDots h2 span {
+  position: absolute;
+  font-size: 0.25em;
+  font-weight: 500;
+  bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+#secDots .dot,
+#minDots .dot,
+#hrDots .dot {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 3px;
+  background: var(--clr);
+  transform-origin: 100px;
+}
+#secDots .active.dot,
+#minDots .active.dot,
+#hrDots .active.dot {
+  background: var(--clr);
+  box-shadow: 0 0 10px var(--clr), 0 0 20px var(--clr), 0 0 30px var(--clr);
+}
+#secDots .active.dot ~ .dot,
+#minDots .active.dot ~ .dot,
+#hrDots .active.dot ~ .dot {
+  background: #555;
+}
+#secDots .dot:nth-child(5n + 5),
+#minDots .dot:nth-child(5n + 5) {
+  width: 20px;
+}
+#hrDots .dot {
+  width: 20px;
+}
+#hrDots .dot::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--clr);
+  box-shadow: 1.5px 9px var(--clr), 4px 18px var(--clr), 7px 27px var(--clr);
+}
+#hrDots .dot.active ~ .dot::before {
+  background: #555;
+  box-shadow: 1.5px 9px #555, 4px 18px #555, 7px 27px #555;
+}
+#button {
+  transform: translateY(180px);
+  position: absolute;
+}
+#button button {
+  width: 150px;
+  height: 70px;
+  border-radius: 15px;
+  font-size: 30px;
+  font-weight: 500;
+  border: 4px #2f363e solid;
+}
+#start {
+  color: #3ef750;
+  background-color: #9b5be9;
+  font-family: "Khmer";
+}
+#stop {
+  position: absolute;
+  transform: translateX(-303px);
+  visibility: hidden;
+  color: #ff2972;
+  background-color: #04fc43;
+  font-family: "Khmer";
+}
+#cal {
+  color: #f72cd1;
+  background-color: #10ff4c;
+  font-family: "Khmer";
+}
+#section-bottom {
+  height: auto;
+  background: #2f363e;
+  padding: 30px;
+  display: none;
+}
+@media only screen and (max-width: 804px) {
+  #reset {
+    transform: translate(-230px, 70px);
+  }
+  .section-mid #status {
+    transform: translateY(20px);
+  }
+  .abouttext {
+    color: red;
+    font-size: 22px;
+  }
+  .about {
+    font-size: 19px;
+  }
+  #section-bottom {
+    padding: 5px;
+    display: none;
+  }
+  .section-mid h3 {
+    font-size: 17px;
+  }
+  .section-mid #status h4 {
+    transform: translate(80px, -187px);
+    font-size: 20px;
+  }
+  #clock {
+    gap: 25px;
+  }
+  #hrDots,
+  #minDots,
+  #secDots {
+    width: 90px;
+    height: 90px;
+  }
+  #hrDots::before,
+  #minDots::before,
+  #secDots::before {
+    inset: -8.4375px;
+  }
+  #hrDots h2,
+  #minDots h2,
+  #secDots h2 {
+    font-size: 1.8em;
+  }
+  #hrDots h2 span,
+  #minDots h2 span,
+  #secDots h2 span {
+    font-size: 0.3em;
+    bottom: 18px;
+    letter-spacing: 0.0375em;
+  }
+  #secDots .dot,
+  #minDots .dot,
+  #hrDots .dot {
+    width: 4.5px;
+    height: 1.35px;
+    transform-origin: 45px;
+  }
+  #secDots .active.dot,
+  #minDots .active.dot,
+  #hrDots .active.dot {
+    box-shadow: 0 0 3.75px var(--clr), 0 0 7.5px var(--clr),
+      0 0 11.25px var(--clr);
+  }
+  #secDots .dot:nth-child(5n + 5),
+  #minDots .dot:nth-child(5n + 5) {
+    width: 9px;
+  }
+  #hrDots .dot {
+    width: 9px;
+  }
+  #hrDots .dot::before {
+    top: 4.21875px;
+    width: 1.6875px;
+    height: 1.687px;
+    box-shadow: 0.675px 4.05px var(--clr), 1.5px 8.1px var(--clr),
+      3.15px 12.15px var(--clr);
+  }
+  #hrDots .dot.active ~ .dot::before {
+    box-shadow: 0.675px 4.05px #555, 1.5px 8.1px #555, 3.15px 12.15px #555;
+  }
+}

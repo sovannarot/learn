@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flowtime Technique</title>
+    <link
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/sovannarot/app/main/assets/img/favicon.jpg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../css/clock.css" />
+    <link rel="manifest" href="../../manifest.json" />
+    <meta name="theme-color" content="#bd10e0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://raw.githubusercontent.com/sovannarot/app/main/assets/icon/maskable_icon_x180.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="https://raw.githubusercontent.com/sovannarot/app/main/assets/icon/maskable_icon_x57.png"
+    />
+    <meta
+      name="description"
+      content="SovannarotApp Is A WebApp have a lot of learning skills like flowtime technique, feynman technique. All it can make you learn fast and learn better than normal."
+    />
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700" />
+  </head>
+  <body>
+    <div class="section-mid" id="section-mid">
+      <div id="flowtime">
+        <a href="../../index.html">Flowtime Timer</a>
+        <a href="./about.html">©</a>
+        <button onclick="displaysection()">
+          <a href="#section-bottom">↓</a>
+        </button>
+      </div>
+      <h3>ណែនាំផ្តោតរៀនតែរយៈពេល១ម៉ោងកន្លះ</h3>
+      <div id="status"></div>
+      <div id="clock">
+        <div id="hrDots" style="--clr: #ff2972"></div>
+        <div id="minDots" style="--clr: #fee800"></div>
+        <div id="secDots" style="--clr: #04fc43"></div>
+      </div>
+      <div id="button">
+        <button onclick="add()" id="start">ចាប់ផ្តើម</button>
+        <button onclick="cal()" id="cal">គណនា</button>
+        <button onclick="remove()" id="stop">ឈប់</button>
+        <button onclick="reset()" id="reset">ត្រឡប់</button>
+      </div>
+    </div>
+    <div id="section-bottom">
+      <div id="footer">
+        <h2>Creater:<a href="./about.html">SovannarotNun</a></h2>
+        <div id="extrastate">
+          <a
+            href="https://www.facebook.com/sovannarotnundev/"
+            class="social-button"
+            target="_blank"
+          >
+            <img
+              src="https://raw.githubusercontent.com/sovannarot/app/main/assets/img/facebook.svg"
+              alt=""
+            />
+          </a>
+          <a
+            href="https://t.me/SovannarotNun"
+            class="social-button"
+            target="_blank"
+          >
+            <img
+              src="https://raw.githubusercontent.com/sovannarot/app/main/assets/img/telegram.svg"
+              alt=""
+            />
+          </a>
+          <a
+            href="https://www.youtube.com/@jkknowledgekh3333"
+            class="social-button"
+            target="_blank"
+          >
+            <img
+              src="https://raw.githubusercontent.com/sovannarot/app/main/assets/img/youtube.svg"
+              alt=""
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+    <audio id="ring">
+      <source
+        src="https://raw.githubusercontent.com/sovannarot/app/main/assets/sound/ring.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <script src="../../service.js"></script>
+    <script src="../js/clock.js"></script>
+  </body>
+</html>

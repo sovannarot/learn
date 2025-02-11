@@ -1,0 +1,222 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Khmer";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://raw.githubusercontent.com/sovannarot/app/main/assets/font/khmer1.woff2)
+    format("woff2");
+  unicode-range: U+1780-17FF, U+19E0-19FF, U+200C-200D, U+25CC, U+0000-00FF,
+    U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+#text-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#text-bottom h4 {
+  color: #f81b1b;
+  font-size: 20px;
+  font-weight: 600;
+}
+body {
+  background: white;
+  font-family: "Khmer", sans-serif;
+}
+#header {
+  height: 9svh;
+  border-radius: 13px;
+  background: darkcyan;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+#header button {
+  background: transparent;
+  border: 0;
+}
+#header button #burger {
+  width: 50px;
+  cursor: pointer;
+}
+#header #midthing {
+  color: lightcoral;
+  font-size: 22px;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#header #icon {
+  cursor: pointer;
+  width: 53px;
+  border-radius: 50%;
+}
+#header #icon img {
+  width: 53px;
+  border-radius: 50%;
+}
+#menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18svh;
+}
+#menu ul {
+  list-style: none;
+}
+#menu ul li {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  height: 6svh;
+  border-radius: 10px;
+  background: var(--clr);
+  transition: 500ms;
+  transform: scale(0);
+}
+#menu ul li a {
+  text-decoration: none;
+  color: blue;
+  font-size: 25px;
+  font-weight: 600;
+}
+#section {
+  transition: 500ms;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #1d4ed8;
+  flex-direction: column;
+}
+#section h4 {
+  color: #f81b1b;
+  font-size: 23px;
+}
+#section article {
+  font-size: 20px;
+  font-weight: 600;
+}
+#section #buttonmid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#section #buttonmid button {
+  width: 153px;
+  height: 45px;
+  border-radius: 20px;
+  border: 2px white solid;
+  background: #0a4af7;
+  color: white;
+  font-size: 17px;
+}
+#section #buttonmid #timerbutton {
+  font-size: 17px;
+  width: 153px;
+  height: 45px;
+  border-radius: 20px;
+  border: 2px white solid;
+  background: #0a4af7;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#section a img {
+  width: 20px;
+  transform: translateX(5px);
+}
+#pyramid {
+  position: absolute;
+  height: 18svh;
+  transform: scale(1);
+  transition: 300ms;
+}
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10svh;
+  border-radius: 13px;
+  gap: 10px;
+}
+#footer h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #e3d004;
+}
+#footer h2 a {
+  color: #f81b1b;
+}
+#header #midthing #lineaction {
+  height: 2px;
+  animation: 2s lineactive infinite;
+}
+#extrastate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#extrastate a img {
+  width: 30px;
+}
+.social-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  text-decoration: none;
+}
+@keyframes lineactive {
+  0%,
+  100% {
+    width: 211px;
+    background: #04fc43;
+  }
+  50% {
+    width: 50px;
+    background: #fee800;
+  }
+}
+#articlebutton {
+  display: flex;
+  font-size: 17px;
+  width: 153px;
+  height: 45px;
+  border-radius: 20px;
+  border: 2px white solid;
+  background: #0a4af7;
+  color: white;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+}
+#installbutton {
+  display: none;
+}
+@media (display-mode: browser) {
+  #installbutton {
+    display: block;
+  }
+  #articlebutton {
+    display: none;
+  }
+}

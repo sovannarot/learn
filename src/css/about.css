@@ -1,0 +1,203 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Khmer";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://raw.githubusercontent.com/sovannarot/app/main/assets/font/khmer1.woff2)
+    format("woff2");
+  unicode-range: U+1780-17FF, U+19E0-19FF, U+200C-200D, U+25CC, U+0000-00FF,
+    U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+body {
+  background: white;
+  font-family: "Khmer", sans-serif;
+}
+#headerabout {
+  height: 9svh;
+  border-radius: 13px;
+  background: darkcyan;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+#headerabout button {
+  background: transparent;
+  border: 0;
+}
+#pyramid {
+  position: absolute;
+  height: 18svh;
+  transform: scale(1);
+  transition: 300ms;
+  width: 100vw;
+  border-radius: 10px;
+}
+#headerabout button #burger {
+  width: 50px;
+  cursor: pointer;
+}
+#headerabout #midthing {
+  color: lightcoral;
+  font-size: 22px;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#headerabout #icon {
+  cursor: pointer;
+  width: 53px;
+  border-radius: 50%;
+}
+#headerabout #icon img {
+  width: 53px;
+  border-radius: 50%;
+}
+#menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18svh;
+}
+#menu ul {
+  list-style: none;
+}
+#menu ul li {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  height: 6svh;
+  border-radius: 10px;
+  background: var(--clr);
+  transition: 500ms;
+  transform: scale(0);
+}
+#menu ul li a {
+  text-decoration: none;
+  color: blue;
+  font-size: 25px;
+  font-weight: 600;
+}
+.social-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  text-decoration: none;
+}
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10svh;
+  border-radius: 13px;
+  gap: 10px;
+}
+#extrastate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#footer h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #e3d004;
+}
+#footer h2 a {
+  color: #f81b1b;
+}
+#extrastate a img {
+  width: 30px;
+}
+#section {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#section h2 {
+  color: #f81b1b;
+  font-size: 25px;
+  font-weight: 600;
+  background: #00fe33;
+  text-align: center;
+  width: 340px;
+  border-radius: 20px;
+}
+#sovannarot {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 80px;
+  border: 4px solid #fee800;
+}
+#section article {
+  font-size: 18px;
+  font-weight: 600;
+  color: #100cf6;
+  margin-left: 5px;
+}
+#section button {
+  margin-top: 10px;
+  height: 50px;
+  width: 140px;
+  background: #5350f3;
+  font-weight: 700;
+  border: none;
+  border-radius: 20px;
+}
+#section button a {
+  color: #fee800;
+  text-decoration: none;
+  font-size: 20px;
+}
+#section button a img {
+  width: 25px;
+  transform: translateY(4.5px);
+  margin-left: 3px;
+}
+@keyframes lineactive {
+  0%,
+  100% {
+    width: 211px;
+    background: #04fc43;
+  }
+  50% {
+    width: 50px;
+    background: #fee800;
+  }
+}
+#headerabout #midthing #lineaction {
+  height: 2px;
+  animation: 2s lineactive infinite;
+}
+#imgabout {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border: 3px red dashed;
+}
+#imgabout img {
+  width: 150px;
+}
+@media only screen and (min-width: 500px) {
+  #pyramid {
+    width: auto;
+  }
+}

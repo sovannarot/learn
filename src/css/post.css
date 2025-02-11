@@ -1,0 +1,296 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Khmer";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://raw.githubusercontent.com/sovannarot/app/main/assets/font/khmer1.woff2)
+    format("woff2");
+  unicode-range: U+1780-17FF, U+19E0-19FF, U+200C-200D, U+25CC, U+0000-00FF,
+    U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+body {
+  background: white;
+  font-family: "Khmer", sans-serif;
+}
+#postlayouttab {
+  position: absolute;
+  top: 0;
+}
+.postlayout {
+  position: absolute;
+  width: 100vw;
+  background: rgb(0, 106, 255);
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transform: scale(0);
+  transition: 300ms;
+}
+.postlayout .top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+.postlayout .top h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: aliceblue;
+}
+.postlayout .top button {
+  width: 30px;
+  background: transparent;
+  border: none;
+}
+.postlayout .mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 7px 0 7px;
+}
+.mid img {
+  width: 330px;
+  border-radius: 15px;
+}
+.mid h2 {
+  color: red;
+}
+.mid article {
+  color: aliceblue;
+}
+#post {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+#post #posttab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.postarticle {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  width: 330px;
+  height: 260px;
+  background: #f81b1b;
+  border-radius: 33px;
+  border: 2px black solid;
+}
+.postarticle img {
+  width: 100%;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+}
+.postarticle .texttab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+.postarticle .texttab button {
+  width: 100px;
+  height: 35px;
+  background: #22c55e;
+  border: none;
+  border-radius: 15px;
+}
+.postarticle .texttab .text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 196.53px;
+  flex-direction: column;
+}
+.postarticle .texttab .text h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 5px;
+  color: white;
+}
+.postarticle .texttab .text h3 {
+  font-size: 15px;
+  font-weight: 400;
+  color: white;
+}
+#post h2 {
+  font-size: 25px;
+  font-weight: 600;
+  color: #4a1bf7;
+  text-align: center;
+  width: 340px;
+  border-radius: 20px;
+  height: 50px;
+  background: #04fc67;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.social-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  text-decoration: none;
+}
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10svh;
+  border-radius: 13px;
+  gap: 10px;
+}
+#extrastate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#footer h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #e3d004;
+}
+#footer h2 a {
+  color: #f81b1b;
+}
+#extrastate a img {
+  width: 30px;
+}
+#headerabout {
+  height: 9svh;
+  border-radius: 13px;
+  background: darkcyan;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+#headerabout button {
+  background: transparent;
+  border: 0;
+}
+#pyramid {
+  position: absolute;
+  height: 18svh;
+  transform: scale(1);
+  transition: 300ms;
+  width: 100vw;
+  border-radius: 20px;
+}
+#headerabout button #burger {
+  width: 50px;
+  cursor: pointer;
+}
+#headerabout #midthing {
+  color: lightcoral;
+  font-size: 22px;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#headerabout #icon {
+  cursor: pointer;
+  width: 53px;
+  border-radius: 50%;
+}
+#headerabout #icon img {
+  width: 53px;
+  border-radius: 50%;
+}
+#menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18svh;
+}
+#menu ul {
+  list-style: none;
+}
+#menu ul li {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  height: 6svh;
+  border-radius: 10px;
+  background: var(--clr);
+  transition: 500ms;
+  transform: scale(0);
+}
+#menu ul li a {
+  text-decoration: none;
+  color: blue;
+  font-size: 25px;
+  font-weight: 600;
+}
+@keyframes lineactive {
+  0%,
+  100% {
+    width: 211px;
+    background: #04fc43;
+  }
+  50% {
+    width: 50px;
+    background: #fee800;
+  }
+}
+#headerabout #midthing #lineaction {
+  height: 2px;
+  animation: 2s lineactive infinite;
+}
+@media only screen and (min-width: 500px) {
+  #pyramid {
+    width: auto;
+  }
+}
+@media only screen and (min-width: 705px) {
+  #post #posttab {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+}
+@media only screen and (min-width: 1050px) {
+  #post #posttab {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+}
+@media only screen and (min-width: 1395px) {
+  #post #posttab {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+  }
+}
+@media only screen and (min-width: 1740px) {
+  #post #posttab {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+  }
+}
