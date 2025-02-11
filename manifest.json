@@ -3,8 +3,8 @@
   "background_color": "#f8e71c",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/app/",
-  "start_url": "/app/index.html",
+  "scope": "/learn/",
+  "start_url": "/learn/index.html",
   "name": "SovannarotApp",
   "short_name": "Sovannarot",
   "description": "SovannarotApp Is A WebApp have a lot of learning skills like flowtime technique, feynman technique. All it can make you learn fast and learn better than normal.",
@@ -77,7 +77,7 @@
       "name": "About Of Sovannarot",
       "short_name": "About Me",
       "description": "Information of creater of website",
-      "url": "/app/src/html/about.html",
+      "url": "/learn/src/html/about.html",
       "icons": [
         {
           "src": "https://raw.githubusercontent.com/sovannarot/learn/main/assets/icon/shortcut.jpg",
@@ -89,7 +89,7 @@
       "name": "Flowtime Technique Timer",
       "short_name": "Flowtime Timer",
       "description": "Clock to Calculate time to focus and take the brake",
-      "url": "/app/src/html/clock.html",
+      "url": "/learn/src/html/clock.html",
       "icons": [
         {
           "src": "https://static.vecteezy.com/system/resources/previews/000/633/173/non_2x/clock-icon-symbol-sign-vector.jpg",
@@ -101,7 +101,7 @@
       "name": "See Learning Posts",
       "short_name": "See Posts",
       "description": "Learning Posts, You can from this posts",
-      "url": "/app/src/html/post.html",
+      "url": "/learn/src/html/post.html",
       "icons": [
         {
           "src": "https://static.thenounproject.com/png/1535273-200.png",
