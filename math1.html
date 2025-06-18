@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sovannarot Math</title>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      @font-face {
+        font-family: "Khmer";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://raw.githubusercontent.com/sovannarot/learn/main/assets/font/khmer1.woff2)
+          format("woff2");
+        unicode-range: U+1780-17FF, U+19E0-19FF, U+200C-200D, U+25CC,
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+          U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      body {
+        background: white;
+        font-family: "Khmer", sans-serif;
+      }
+      .text1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translate(-40px, -50px);
+      }
+      .text2 {
+        transform: translate(220px, -117px);
+      }
+      .text3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translate(17px, -65px);
+      }
+      .text4 {
+        transform: translate(350px, -120px);
+      }
+      .table {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .x {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        flex-direction: row;
+      }
+      .x h3:nth-child(2) {
+        width: 25%;
+        text-align: center;
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+      }
+      .x h3:nth-child(3) {
+        width: 25%;
+        text-align: center;
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+      }
+      .x h3:nth-child(4) {
+        width: 25%;
+        text-align: center;
+        border-bottom: 2px solid black;
+        border-right: 2px solid black;
+        border-top: 2px solid black;
+      }
+      .x h3:nth-child(1) {
+        width: 25%;
+        text-align: center;
+        border: 2px solid black;
+      }
+      .f1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        flex-direction: row;
+      }
+      .f {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 116px;
+        flex-direction: row;
+        border-bottom: 2px solid black;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+      }
+      .f1 h3:nth-child(2) {
+        width: 25%;
+        height: 100%;
+        text-align: center;
+        border-bottom: 2px solid black;
+      }
+      .f1 h3:nth-child(3) {
+        width: 25%;
+        text-align: center;
+        border-bottom: 2px solid black;
+        transform: translateY(16px);
+      }
+      .f1 h3:nth-child(4) {
+        width: 25%;
+        text-align: center;
+        border-bottom: 2px solid black;
+        border-right: 2px solid black;
+      }
+      .f1 h3:nth-child(1) {
+        width: 25%;
+        text-align: center;
+        border-right: 2px solid black;
+        border-bottom: 2px solid black;
+        border-left: 2px solid black;
+      }
+      .line1 {
+        width: 2px;
+        height: 150px;
+        background-color: black;
+        margin-top: 10px;
+        position: absolute;
+        transform: translate(45px, 10px);
+      }
+      .line2 {
+        width: 2px;
+        height: 150px;
+        background-color: black;
+        margin-top: 10px;
+        position: absolute;
+        transform: translate(50px, 10px);
+      }
+      .line3 {
+        width: 2px;
+        height: 116px;
+        background-color: black;
+        margin-top: 10px;
+        position: absolute;
+        transform: translate(-91px, 30px);
+      }
+      .f div:nth-child(2) {
+        position: absolute;
+      }
+      .f div:nth-child(3) {
+        position: absolute;
+      }
+      .f div:nth-child(4) {
+        position: absolute;
+      }
+      .f div:nth-child(5) {
+        position: absolute;
+      }
+      .line4 {
+        position: absolute;
+        font-size: 100px;
+      }
+      .line5 {
+        position: absolute;
+        font-size: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>សិក្សាអថេរភាព និងសង់ក្រាបនៃអនុគមន៍៖</h3>
+    <h2 id="1"></h2>
+    <div class="container">
+      <h2 id="2"></h2>
+      <h2 id="3"></h2>
+      <h2 id="4"></h2>
+      <h2>-​ លីមីតចុងដែន​ និង អាស៊ីមតូត</h2>
+      <h2 id="5"></h2>
+      <h2 id="6"></h2>
+      <div class="text">
+        <h2>ដោយ</h2>
+        <div id="7" class="text1"></div>
+        <h2 id="8" class="text2"></h2>
+      </div>
+      <div class="text">
+        <h2>ដោយ</h2>
+        <div id="9" class="text3"></div>
+        <h2 id="10" class="text4"></h2>
+      </div>
+      <h2>- តារាងអថេរភាព</h2>
+      <div class="table">
+        <div class="x">
+          <h3>x</h3>
+          <h3>-∞</h3>
+          <h3 id="11"></h3>
+          <h3>+∞</h3>
+        </div>
+        <div class="f1">
+          <h3>f'(x)</h3>
+          <h3 id="fsymbol1">=</h3>
+          <h3></h3>
+          <h3 id="fsymbol2">-</h3>
+        </div>
+        <div class="f">
+          <h3>f(x)</h3>
+          <div id="x1">1</div>
+          <div id="y1">+∞</div>
+          <div id="y2">-∞</div>
+          <div id="x2">3</div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+        <div class="line4" id="line4"></div>
+        <div class="line5" id="line5"></div>
+      </div>
+    </div>
+
+    <script>
+      function returnh1(e) {
+        if (Number.isInteger(e)) {
+          return e;
+        } else {
+          // Find the fraction representation
+          const tolerance = 1.0e-8;
+          let h1 = 1,
+            h2 = 0,
+            k1 = 0,
+            k2 = 1,
+            b = e;
+          do {
+            let a = Math.floor(b);
+            let aux = h1;
+            h1 = a * h1 + h2;
+            h2 = aux;
+            aux = k1;
+            k1 = a * k1 + k2;
+            k2 = aux;
+            b = 1 / (b - a);
+          } while (Math.abs(e - h1 / k1) > e * tolerance);
+          return h1;
+        }
+      }
+      function returnk1(e) {
+        if (Number.isInteger(e)) {
+          return 1;
+        } else {
+          // Find the fraction representation
+          const tolerance = 1.0e-8;
+          let h1 = 1,
+            h2 = 0,
+            k1 = 0,
+            k2 = 1,
+            b = e;
+          do {
+            let a = Math.floor(b);
+            let aux = h1;
+            h1 = a * h1 + h2;
+            h2 = aux;
+            aux = k1;
+            k1 = a * k1 + k2;
+            k2 = aux;
+            b = 1 / (b - a);
+          } while (Math.abs(e - h1 / k1) > e * tolerance);
+          return k1;
+        }
+      }
+      let a = 3;
+      let b = -2;
+      let c = 4;
+      let d = 2;
+      let calc = Math.abs(d / c);
+      let e = returnh1(calc);
+      let f = returnk1(calc);
+      let a1 = returnh1(Math.abs(a / c));
+      let c1 = returnk1(Math.abs(a / c));
+      console.log(e, f);
+      let g = a * d - b * c;
+      let h = "";
+      let l =
+        f !== 1
+          ? (d < 0 && c < 0) || (d > 0 && c > 0)
+            ? `-\\frac{${e}}{${f}}`
+            : `\\frac{${e}}{${f}}`
+          : (d < 0 && c < 0) || (d > 0 && c > 0)
+          ? `-${e}`
+          : `${e}`;
+      if (f !== 1) {
+        if ((d < 0 && c < 0) || (d > 0 && c > 0)) {
+          h = `-${e}/${f}`;
+        } else {
+          h = `${e}/${f}`;
+        }
+      } else {
+        if ((d < 0 && c < 0) || (d > 0 && c > 0)) {
+          h = `-${e}`;
+        } else {
+          h = `${e}`;
+        }
+      }
+      let i = b - a * (d / c);
+      function operation(boll) {
+        if (i > 0) {
+          if (boll) {
+            if (c > 0) {
+              return "+";
+            } else {
+              return "-";
+            }
+          } else {
+            if (c > 0) {
+              return "-";
+            } else {
+              return "+";
+            }
+          }
+        } else {
+          if (boll) {
+            if (c > 0) {
+              return "-";
+            } else {
+              return "+";
+            }
+          } else {
+            if (c > 0) {
+              return "+";
+            } else {
+              return "-";
+            }
+          }
+        }
+      }
+      let ab = `${a}x + ${b}`;
+      if (a > 0 && a != 1) {
+        if (b > 0) {
+          ab = `${a}x + ${b}`;
+        } else if (b < 0) {
+          ab = `${a}x  ${b}`;
+        } else {
+          ab = `${a}x`;
+        }
+      } else if (a < 0) {
+        if (b > 0) {
+          ab = `${b} ${a}x`;
+        } else if (b < 0) {
+          ab = `${a}x  ${b}`;
+        } else {
+          ab = `${a}x`;
+        }
+      } else if (a == 1) {
+        if (b > 0) {
+          ab = `x + ${b}`;
+        } else if (b < 0) {
+          ab = `x  ${b}`;
+        } else {
+          ab = `x`;
+        }
+      }
+      let cd = `${c}x + ${d}`;
+      if (c > 0 && c != 1) {
+        if (d > 0) {
+          cd = `${c}x + ${d}`;
+        } else if (d < 0) {
+          cd = `${c}x  ${d}`;
+        } else {
+          cd = `${c}x`;
+        }
+      } else if (c < 0) {
+        if (d > 0) {
+          cd = `${d} ${c}x`;
+        } else if (d < 0) {
+          cd = `${c}x  ${d}`;
+        } else {
+          cd = `${c}x`;
+        }
+      } else if (c == 1) {
+        if (d > 0) {
+          cd = `x + ${d}`;
+        } else if (d < 0) {
+          cd = `x  ${d}`;
+        } else {
+          cd = `x`;
+        }
+      }
+      if (c > 0 || (c < 0 && d < 0)) {
+        if (d > 0) {
+          document.getElementById(
+            "1"
+          ).innerHTML = `\\[f(x)=\\frac{${ab}}{${cd}}\\]`;
+          if (g > 0) {
+            document.getElementById(
+              "3"
+            ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} > 0\\] ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h} នោះ f'(x) > 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍កើននៅលើ(-∞, ${h}) (${h},+∞)។`;
+          } else {
+            document.getElementById(
+              "3"
+            ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} < 0\\]ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h}​ នោះ f'(x) < 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍ចុះនៅលើ(-∞, ${h}) (${h},+∞)។`;
+          }
+          document.getElementById(
+            "5"
+          ).innerHTML = `\\[\\lim_{x \\to ${l}^-} f(x) = \\lim_{x \\to ${l}^-} \\frac{${a}x + ${b}}{${cd}} = ${operation(
+            false
+          )}\\infty\\]`;
+          document.getElementById(
+            "6"
+          ).innerHTML = `\\[\\lim_{x \\to ${l}^+} f(x) = \\lim_{x \\to ${l}^+} \\frac{${a}x + ${b}}{${cd}} = ${operation(
+            true
+          )}\\infty\\]`;
+        } else {
+          document.getElementById(
+            "1"
+          ).innerHTML = `\\[f(x)=\\frac{${ab}}{${cd}}\\]`;
+          if (g > 0) {
+            document.getElementById(
+              "3"
+            ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} > 0\\] ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h} នោះ f'(x) > 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍កើននៅលើ(-∞, ${h}) (${h},+∞)។`;
+          } else {
+            document.getElementById(
+              "3"
+            ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} < 0\\]ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h}​ នោះ f'(x) < 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍ចុះនៅលើ(-∞, ${h}) (${h},+∞)។`;
+          }
+          document.getElementById(
+            "5"
+          ).innerHTML = `\\[\\lim_{x \\to ${l}^-} f(x) = \\lim_{x \\to ${l}^-} \\frac{${ab}}{${cd}} = ${operation(
+            false
+          )}\\infty\\]`;
+          document.getElementById(
+            "6"
+          ).innerHTML = `\\[\\lim_{x \\to ${l}^+} f(x) = \\lim_{x \\to ${l}^+} \\frac{${ab}}{${cd}} = ${operation(
+            true
+          )}\\infty\\]`;
+        }
+      } else if (c < 0 && d > 0) {
+        document.getElementById(
+          "1"
+        ).innerHTML = `\\[f(x)=\\frac{${ab}}{${cd}}\\]`;
+        if (g > 0) {
+          document.getElementById(
+            "3"
+          ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})}x)^2} >0\\]ដោយ​ (${cd}}x)² > 0 ចំពោះ x ≠ ${h} នោះ f'(x) > 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍កើននៅលើ(-∞, ${h}) (${h},+∞)។`;
+          document.getElementById(
+            "5"
+          ).innerHTML = `\\[\\lim_{x \\to ${l}^-} f(x) = \\lim_{x \\to ${l}^-} \\frac{${a}x + ${b}}{${cd}} = ${operation(
+            false
+          )}\\infty\\]`;
+          document.getElementById(
+            "6"
+          ).innerHTML = `\\[\\lim_{x \\to ${l}^+} f(x) = \\lim_{x \\to ${l}^+} \\frac{${a}x + ${b}}{${cd}} = ${operation(
+            true
+          )}\\infty\\]`;
+        } else {
+          document.getElementById(
+            "3"
+          ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd}}x)^2} < 0\\] ដោយ​ (${cd}}x)² > 0 ចំពោះ x ≠ ${h}​ នោះ f'(x) < 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍ចុះនៅលើ(-∞, ${h}) (${h},+∞)។`;
+          document.getElementById(
+            "5"
+          ).innerHTML = `\\[\\lim_{x \\to ${l}^-} f(x) = \\lim_{x \\to ${l}^-} \\frac{${ab}}{${cd}} = ${operation(
+            false
+          )}\\infty\\]`;
+          document.getElementById(
+            "6"
+          ).innerHTML = `\\[\\lim_{x \\to ${l}^+} f(x) = \\lim_{x \\to ${l}^+} \\frac{${ab}}{${cd}} = ${operation(
+            true
+          )}\\infty\\]`;
+        }
+      }
+      if (f !== 1) {
+        if ((d < 0 && c < 0) || (d > 0 && c > 0)) {
+          document.getElementById(
+            "2"
+          ).innerHTML = `- ដែនកំណត់ \\[D_f= (-\\infty, -\\frac{${e}}{${f}}) \\cup (-\\frac{${e}}{${f}}, +\\infty)\\]`;
+        } else {
+          document.getElementById(
+            "2"
+          ).innerHTML = `- ដែនកំណត់ \\[D_f= (-\\infty, \\frac{${e}}{${f}}) \\cup (\\frac{${e}}{${f}}, +\\infty)\\]`;
+        }
+      } else {
+        if ((d < 0 && c < 0) || (d > 0 && c > 0)) {
+          document.getElementById(
+            "2"
+          ).innerHTML = `- ដែនកំណត់ \\[D_f= (-\\infty, -${e}) \\cup (-${e}, +\\infty)\\]`;
+        } else {
+          document.getElementById(
+            "2"
+          ).innerHTML = `- ដែនកំណត់ \\[D_f= (-\\infty, ${e}) \\cup (${e}, +\\infty)\\]`;
+        }
+      }
+      const array = document.querySelectorAll(".MathJax");
+      console.log(array);
+      let ab1 =
+        c1 !== 1
+          ? (a < 0 && c < 0) || (a > 0 && c > 0)
+            ? `${a1}/${c1}`
+            : `-${a1}/${c1}`
+          : (a < 0 && c < 0) || (a > 0 && c > 0)
+          ? `${a1}`
+          : `-${a1}`;
+      let ab2 =
+        c1 !== 1
+          ? (a < 0 && c < 0) || (a > 0 && c > 0)
+            ? `\\frac{${a1}}{${c1}}`
+            : `-\\frac{${a1}}{${c1}}`
+          : (a < 0 && c < 0) || (a > 0 && c > 0)
+          ? `${a1}`
+          : `-${a1}`;
+      console.log(a1, c1);
+      document.getElementById(
+        "7"
+      ).innerHTML = `\\[\\lim_{x\\to ${l}} f(x) = \\pm \\infty\\]`;
+      document.getElementById(
+        "8"
+      ).innerHTML = `គេថាបន្ទាត់​x=${h} ជាអាស៊ីមតូតឈរនៃក្រាបតាងអនុគមន៍f(x)។`;
+      document.getElementById(
+        "9"
+      ).innerHTML = `\\[\\lim_{x\\to\\pm \\infty} f(x)= \\lim_{x\\to\\pm \\infty} \\frac{${ab}}{${cd}} = ${ab2}\\]`;
+      document.getElementById(
+        "10"
+      ).innerHTML = `គេថាបន្ទាត់y = ${ab1} ជាអាស៊ីមតូតឈរនៃក្រាបតាងអនុគមន៍f(x)។`;
+      document.getElementById("11").innerText = ab1;
+      document.getElementById("fsymbol1").innerText = g > 0 ? "+" : "-";
+      document.getElementById("fsymbol2").innerText = g > 0 ? "+" : "-";
+      if (operation(false) == "+") {
+        document.getElementById(
+          "y1"
+        ).style = `transform: translate(20px,-40px)`;
+        document.getElementById("y1").innerText = "+∞";
+        document.getElementById("x1").style =
+          "transform: translate(-45px, 40px)";
+        document.getElementById("x1").innerText = ``;
+      } else {
+        document.getElementById("y1").style = `transform: translate(20px,40px)`;
+        document.getElementById("y1").innerText = "-∞";
+        document.getElementById("x1").style =
+          "transform: translate(-45px, -40px)";
+      }
+      if (operation(true) == "+") {
+        document.getElementById(
+          "y2"
+        ).style = `transform:  translate(70px, -40px)`;
+        document.getElementById("y2").innerText = "+∞";
+        document.getElementById("x2").style =
+          "transform: translate(130px, 40px)";
+      } else {
+        document.getElementById(
+          "y2"
+        ).style = `transform: translate(70px, 40px)`;
+        document.getElementById("y2").innerText = "-∞";
+        document.getElementById("x2").style =
+          "transform: translate(130px, -40px)";
+      }
+      document.getElementById("x1").innerText = ab1;
+      document.getElementById("x2").innerText = ab1;
+      if (g < 0) {
+        document.getElementById("line4").innerText = "→";
+        document.getElementById("line4").style =
+          "top: 1330px; right: 130px; transform: rotate(50deg);";
+        document.getElementById("line5").innerText = "→";
+        document.getElementById("line5").style =
+          "transform: rotate(50deg); top: 1330px; right:13px;";
+      } else {
+        document.getElementById("line4").innerText = "→";
+        document.getElementById("line4").style =
+          "top: 1480px; right: 155px; transform: rotate(-50deg);";
+        document.getElementById("line5").innerText = "→";
+        document.getElementById("line5").style =
+          "transform: rotate(-50deg); top: 1480px; right:35px;";
+      }
+    </script>
+  </body>
+</html>
