@@ -314,10 +314,14 @@
           return k1;
         }
       }
-      let a = +prompt("Enter The Numbers of a");
+      /* let a = +prompt("Enter The Numbers of a");
       let b = +prompt("Enter The Numbers of b");
       let c = +prompt("Enter The Numbers of c");
-      let d = +prompt("Enter The Numbers of d");
+      let d = +prompt("Enter The Numbers of d"); */
+      let a = 6;
+      let b = 2;
+      let c = 12;
+      let d = 2;
       let calc = Math.abs(d / c);
       let e = returnh1(calc);
       let f = returnk1(calc);
@@ -498,9 +502,6 @@
           ).innerHTML = `- ដែនកំណត់ \\[D_f= (-\\infty, ${e}) \\cup (${e}, +\\infty)\\]`;
         }
       }
-      const array = document.querySelectorAll(".MathJax");
-      console.log(array);
-
       let ab2 =
         c1 !== 1
           ? (a < 0 && c < 0) || (a > 0 && c > 0)
@@ -555,21 +556,40 @@
       }
       document.getElementById("x1").innerText = ab1;
       document.getElementById("x2").innerText = ab1;
-      if (g < 0) {
-        document.getElementById("line4").innerText = "→";
-        document.getElementById("line4").style =
-          "top: 1330px; right: 130px; transform: rotate(50deg);";
-        document.getElementById("line5").innerText = "→";
-        document.getElementById("line5").style =
-          "transform: rotate(50deg); top: 1330px; right:13px;";
+      if (c1 == 1) {
+        if (g < 0) {
+          document.getElementById("line4").innerText = "→";
+          document.getElementById("line4").style =
+            "top: 1430px; right: 130px; transform: rotate(50deg);";
+          document.getElementById("line5").innerText = "→";
+          document.getElementById("line5").style =
+            "transform: rotate(50deg); top: 1430px; right:13px;";
+        } else {
+          document.getElementById("line4").innerText = "→";
+          document.getElementById("line4").style =
+            "top: 1440px; right: 155px; transform: rotate(-50deg);";
+          document.getElementById("line5").innerText = "→";
+          document.getElementById("line5").style =
+            "transform: rotate(-50deg); top: 1440px; right:35px;";
+        }
       } else {
-        document.getElementById("line4").innerText = "→";
-        document.getElementById("line4").style =
-          "top: 1480px; right: 155px; transform: rotate(-50deg);";
-        document.getElementById("line5").innerText = "→";
-        document.getElementById("line5").style =
-          "transform: rotate(-50deg); top: 1480px; right:35px;";
+        if (g < 0) {
+          document.getElementById("line4").innerText = "→";
+          document.getElementById("line4").style =
+            "top: 1470px; right: 130px; transform: rotate(50deg);";
+          document.getElementById("line5").innerText = "→";
+          document.getElementById("line5").style =
+            "transform: rotate(50deg); top: 1470px; right:13px;";
+        } else {
+          document.getElementById("line4").innerText = "→";
+          document.getElementById("line4").style =
+            "top: 1480px; right: 155px; transform: rotate(-50deg);";
+          document.getElementById("line5").innerText = "→";
+          document.getElementById("line5").style =
+            "transform: rotate(-50deg); top: 1480px; right:35px;";
+        }
       }
+
       function calcy(number) {
         let up = a * number + b;
         let down = c * number + d;
@@ -622,24 +642,30 @@
           break;
         }
       }
-      console.log(numberx, numbery);
-      if (numberx[3]) {
+      if (numberx.length == 4) {
         document.getElementById(
           "numberx"
         ).innerText = `${numberx[0]}, ${numberx[1]}, ${numberx[2]},${numberx[3]}`;
-      } else {
-        document.getElementById(
-          "numberx"
-        ).innerText = `${numberx[0]}, ${numberx[1]}, ${numberx[2]}`;
-      }
-      if (numbery[3]) {
         document.getElementById(
           "numbery"
         ).innerText = `${numbery[0]}, ${numbery[1]}, ${numbery[2]},${numbery[3]}`;
-      } else {
+      } else if (numberx.length == 3) {
+        document.getElementById(
+          "numberx"
+        ).innerText = `${numberx[0]}, ${numberx[1]}, ${numberx[2]}`;
         document.getElementById(
           "numbery"
         ).innerText = `${numbery[0]}, ${numbery[1]} ,${numbery[2]}`;
+      } else if (numberx.length == 2) {
+        document.getElementById(
+          "numberx"
+        ).innerText = `${numberx[0]}, ${numberx[1]}`;
+        document.getElementById(
+          "numbery"
+        ).innerText = `${numbery[0]}, ${numbery[1]}`;
+      } else {
+        document.getElementById("numberx").innerText = `${numberx[0]}`;
+        document.getElementById("numbery").innerText = `${numbery[0]}`;
       }
       // Initialize the calculator
       const elt = document.getElementById("calculator");
@@ -662,7 +688,8 @@
           latex: `(${point.x},${point.y})`,
         });
       });
-      // Add the po
+      // Add the point
+
       // Add the equation
       calculator.setExpression({
         id: "eq1",
