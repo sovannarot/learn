@@ -173,6 +173,31 @@
         position: absolute;
         font-size: 100px;
       }
+      .wrap {
+        display: grid;
+        width: 200px;
+        height: 80px;
+        text-align: center;
+        grid-template-areas:
+          "item1 item3 item3"
+          "item2 item4 item4";
+      }
+      #x0 {
+        grid-area: item1;
+        border: 2px solid black;
+      }
+      #numberx {
+        grid-area: item3;
+        border: 2px solid black;
+      }
+      #numbery {
+        grid-area: item4;
+        border: 2px solid black;
+      }
+      #y0 {
+        grid-area: item2;
+        border: 2px solid black;
+      }
     </style>
   </head>
   <body>
@@ -226,8 +251,20 @@
         <div class="line4" id="line4"></div>
         <div class="line5" id="line5"></div>
       </div>
+      <h2>-​ សង់ក្រាប</h2>
+      <h2>+ តារាងតម្លៃលេខ</h2>
+      <div class="wrap">
+        <h2 id="x0">x</h2>
+        <h2 id="y0">y</h2>
+        <div id="numberx"></div>
+        <div id="numbery"></div>
+      </div>
+      <div
+        id="calculator"
+        style="width: 600px; height: 400px; margin: 50px"
+      ></div>
     </div>
-
+    <script src="https://www.desmos.com/api/v1.6/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
     <script>
       function returnh1(e) {
         if (Number.isInteger(e)) {
@@ -277,16 +314,28 @@
           return k1;
         }
       }
-      let a = +prompt("Enter The Numbers");
+      /* let a = +prompt("Enter The Numbers");
       let b = +prompt("Enter The Numbers");
       let c = +prompt("Enter The Numbers");
-      let d = +prompt("Enter The Numbers");
+      let d = +prompt("Enter The Numbers"); */
+      let a = -1;
+      let b = -2;
+      let c = -1;
+      let d = 2;
       let calc = Math.abs(d / c);
       let e = returnh1(calc);
       let f = returnk1(calc);
       let a1 = returnh1(Math.abs(a / c));
       let c1 = returnk1(Math.abs(a / c));
-      console.log(e, f);
+      let ab1 =
+        c1 !== 1
+          ? (a < 0 && c < 0) || (a > 0 && c > 0)
+            ? `${a1}/${c1}`
+            : `-${a1}/${c1}`
+          : (a < 0 && c < 0) || (a > 0 && c > 0)
+          ? `${a1}`
+          : `-${a1}`;
+
       let g = a * d - b * c;
       let h = "";
       let l =
@@ -351,7 +400,7 @@
         } else {
           ab = `${a}x`;
         }
-      } else if (a < 0) {
+      } else if (a < 0 && a !== -1) {
         if (b > 0) {
           ab = `${b} ${a}x`;
         } else if (b < 0) {
@@ -367,6 +416,14 @@
         } else {
           ab = `x`;
         }
+      } else {
+        if (b > 0) {
+          ab = `${b} - x`;
+        } else if (b < 0) {
+          ab = `-x  ${b}`;
+        } else {
+          ab = `-x`;
+        }
       }
       let cd = `${c}x + ${d}`;
       if (c > 0 && c != 1) {
@@ -377,7 +434,7 @@
         } else {
           cd = `${c}x`;
         }
-      } else if (c < 0) {
+      } else if (c < 0 && c !== -1) {
         if (d > 0) {
           cd = `${d} ${c}x`;
         } else if (d < 0) {
@@ -393,89 +450,37 @@
         } else {
           cd = `x`;
         }
-      }
-      if (c > 0 || (c < 0 && d < 0)) {
+      } else {
         if (d > 0) {
-          document.getElementById(
-            "1"
-          ).innerHTML = `\\[f(x)=\\frac{${ab}}{${cd}}\\]`;
-          if (g > 0) {
-            document.getElementById(
-              "3"
-            ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} > 0\\] ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h} នោះ f'(x) > 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍កើននៅលើ(-∞, ${h}) (${h},+∞)។`;
-          } else {
-            document.getElementById(
-              "3"
-            ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} < 0\\]ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h}​ នោះ f'(x) < 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍ចុះនៅលើ(-∞, ${h}) (${h},+∞)។`;
-          }
-          document.getElementById(
-            "5"
-          ).innerHTML = `\\[\\lim_{x \\to ${l}^-} f(x) = \\lim_{x \\to ${l}^-} \\frac{${a}x + ${b}}{${cd}} = ${operation(
-            false
-          )}\\infty\\]`;
-          document.getElementById(
-            "6"
-          ).innerHTML = `\\[\\lim_{x \\to ${l}^+} f(x) = \\lim_{x \\to ${l}^+} \\frac{${a}x + ${b}}{${cd}} = ${operation(
-            true
-          )}\\infty\\]`;
+          cd = `${d}-x`;
+        } else if (d < 0) {
+          cd = `-x  ${d}`;
         } else {
-          document.getElementById(
-            "1"
-          ).innerHTML = `\\[f(x)=\\frac{${ab}}{${cd}}\\]`;
-          if (g > 0) {
-            document.getElementById(
-              "3"
-            ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} > 0\\] ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h} នោះ f'(x) > 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍កើននៅលើ(-∞, ${h}) (${h},+∞)។`;
-          } else {
-            document.getElementById(
-              "3"
-            ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} < 0\\]ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h}​ នោះ f'(x) < 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍ចុះនៅលើ(-∞, ${h}) (${h},+∞)។`;
-          }
-          document.getElementById(
-            "5"
-          ).innerHTML = `\\[\\lim_{x \\to ${l}^-} f(x) = \\lim_{x \\to ${l}^-} \\frac{${ab}}{${cd}} = ${operation(
-            false
-          )}\\infty\\]`;
-          document.getElementById(
-            "6"
-          ).innerHTML = `\\[\\lim_{x \\to ${l}^+} f(x) = \\lim_{x \\to ${l}^+} \\frac{${ab}}{${cd}} = ${operation(
-            true
-          )}\\infty\\]`;
-        }
-      } else if (c < 0 && d > 0) {
-        document.getElementById(
-          "1"
-        ).innerHTML = `\\[f(x)=\\frac{${ab}}{${cd}}\\]`;
-        if (g > 0) {
-          document.getElementById(
-            "3"
-          ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})}x)^2} >0\\]ដោយ​ (${cd}}x)² > 0 ចំពោះ x ≠ ${h} នោះ f'(x) > 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍កើននៅលើ(-∞, ${h}) (${h},+∞)។`;
-          document.getElementById(
-            "5"
-          ).innerHTML = `\\[\\lim_{x \\to ${l}^-} f(x) = \\lim_{x \\to ${l}^-} \\frac{${a}x + ${b}}{${cd}} = ${operation(
-            false
-          )}\\infty\\]`;
-          document.getElementById(
-            "6"
-          ).innerHTML = `\\[\\lim_{x \\to ${l}^+} f(x) = \\lim_{x \\to ${l}^+} \\frac{${a}x + ${b}}{${cd}} = ${operation(
-            true
-          )}\\infty\\]`;
-        } else {
-          document.getElementById(
-            "3"
-          ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd}}x)^2} < 0\\] ដោយ​ (${cd}}x)² > 0 ចំពោះ x ≠ ${h}​ នោះ f'(x) < 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍ចុះនៅលើ(-∞, ${h}) (${h},+∞)។`;
-          document.getElementById(
-            "5"
-          ).innerHTML = `\\[\\lim_{x \\to ${l}^-} f(x) = \\lim_{x \\to ${l}^-} \\frac{${ab}}{${cd}} = ${operation(
-            false
-          )}\\infty\\]`;
-          document.getElementById(
-            "6"
-          ).innerHTML = `\\[\\lim_{x \\to ${l}^+} f(x) = \\lim_{x \\to ${l}^+} \\frac{${ab}}{${cd}} = ${operation(
-            true
-          )}\\infty\\]`;
+          cd = `-x`;
         }
       }
+      document.getElementById(
+        "1"
+      ).innerHTML = `\\[f(x)=\\frac{${ab}}{${cd}}\\]`;
+      if (g > 0) {
+        document.getElementById(
+          "3"
+        ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} > 0\\] ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h} នោះ f'(x) > 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍កើននៅលើ(-∞, ${h}) (${h},+∞)។`;
+      } else {
+        document.getElementById(
+          "3"
+        ).innerHTML = `- ទិសដៅអថេរភាព \\[f'(x)=\\frac{${g}}{(${cd})^2} < 0\\] ដោយ​ (${cd})² > 0 ចំពោះ x ≠ ${h} នោះ f'(x) < 0 ចំពោះ x ≠ ${h} គេថា f(x) មានអនុគមន៍ចុះនៅលើ(-∞, ${h}) (${h},+∞)។`;
+      }
+      document.getElementById(
+        "5"
+      ).innerHTML = `\\[\\lim_{x \\to ${l}^-} f(x) = \\lim_{x \\to ${l}^-} \\frac{${ab}}{${cd}} = ${operation(
+        false
+      )}\\infty\\]`;
+      document.getElementById(
+        "6"
+      ).innerHTML = `\\[\\lim_{x \\to ${l}^+} f(x) = \\lim_{x \\to ${l}^+} \\frac{${ab}}{${cd}} = ${operation(
+        true
+      )}\\infty\\]`;
       if (f !== 1) {
         if ((d < 0 && c < 0) || (d > 0 && c > 0)) {
           document.getElementById(
@@ -499,14 +504,7 @@
       }
       const array = document.querySelectorAll(".MathJax");
       console.log(array);
-      let ab1 =
-        c1 !== 1
-          ? (a < 0 && c < 0) || (a > 0 && c > 0)
-            ? `${a1}/${c1}`
-            : `-${a1}/${c1}`
-          : (a < 0 && c < 0) || (a > 0 && c > 0)
-          ? `${a1}`
-          : `-${a1}`;
+
       let ab2 =
         c1 !== 1
           ? (a < 0 && c < 0) || (a > 0 && c > 0)
@@ -515,7 +513,6 @@
           : (a < 0 && c < 0) || (a > 0 && c > 0)
           ? `${a1}`
           : `-${a1}`;
-      console.log(a1, c1);
       document.getElementById(
         "7"
       ).innerHTML = `\\[\\lim_{x\\to ${l}} f(x) = \\pm \\infty\\]`;
@@ -528,7 +525,7 @@
       document.getElementById(
         "10"
       ).innerHTML = `គេថាបន្ទាត់y = ${ab1} ជាអាស៊ីមតូតឈរនៃក្រាបតាងអនុគមន៍f(x)។`;
-      document.getElementById("11").innerText = ab1;
+      document.getElementById("11").innerText = h;
       document.getElementById("fsymbol1").innerText = g > 0 ? "+" : "-";
       document.getElementById("fsymbol2").innerText = g > 0 ? "+" : "-";
       if (operation(false) == "+") {
@@ -577,6 +574,117 @@
         document.getElementById("line5").style =
           "transform: rotate(-50deg); top: 1480px; right:35px;";
       }
+      function calcy(number) {
+        let up = a * number + b;
+        let down = c * number + d;
+        let all = up / down;
+        return all;
+      }
+      let numberx = [];
+      let numbery = [];
+      for (let i = 1; i < 20; i++) {
+        let calcxy = -d / c;
+        if (Number.isInteger(calcxy)) {
+          if (
+            Number.isInteger(calcy(calcxy - i)) ||
+            calcy(calcxy - i) == 0.5 ||
+            calcy(calcxy - i) == -0.5
+          ) {
+            numberx.push(calcxy - i);
+            numbery.push(calcy(calcxy - i));
+          }
+        } else {
+          if (
+            Number.isInteger(calcy(Math.floor(calcxy) - i + 1)) ||
+            calcy(Math.floor(calcxy) - i + 1) == 0.5 ||
+            calcy(Math.floor(calcxy) - i + 1) == -0.5
+          ) {
+            numberx.push(Math.floor(calcxy) - i + 1);
+            numbery.push(calcy(Math.floor(calcxy) - i + 1));
+          }
+        }
+        if (Number.isInteger(calcxy)) {
+          if (
+            Number.isInteger(calcy(calcxy + i)) ||
+            calcy(calcxy + i) == 0.5 ||
+            calcy(calcxy + i) == -0.5
+          ) {
+            numberx.push(calcxy + i);
+            numbery.push(calcy(calcxy + i));
+          }
+        } else {
+          if (
+            Number.isInteger(calcy(Math.floor(calcxy) + i - 1)) ||
+            calcy(Math.floor(calcxy) + i - 1) == 0.5 ||
+            calcy(Math.floor(calcxy) + i - 1) == -0.5
+          ) {
+            numberx.push(Math.floor(calcxy) + i - 1);
+            numbery.push(calcy(Math.floor(calcxy) + i - 1));
+          }
+        }
+        if (numberx.length == 4) {
+          break;
+        }
+      }
+      console.log(numberx, numbery);
+      if (numberx[3]) {
+        document.getElementById(
+          "numberx"
+        ).innerText = `${numberx[0]}, ${numberx[1]}, ${numberx[2]},${numberx[3]}`;
+      } else {
+        document.getElementById(
+          "numberx"
+        ).innerText = `${numberx[0]}, ${numberx[1]}, ${numberx[2]}`;
+      }
+      if (numbery[3]) {
+        document.getElementById(
+          "numbery"
+        ).innerText = `${numbery[0]}, ${numbery[1]}, ${numbery[2]},${numbery[3]}`;
+      } else {
+        document.getElementById(
+          "numbery"
+        ).innerText = `${numbery[0]}, ${numbery[1]} ,${numbery[2]}`;
+      }
+      // Initialize the calculator
+      const elt = document.getElementById("calculator");
+      const calculator = Desmos.GraphingCalculator(elt, {
+        keypad: false,
+        expressions: false,
+      });
+
+      // Example point and equation
+      const points = [
+        { x: numberx[0], y: numbery[0] },
+        { x: numberx[1], y: numbery[1] },
+        { x: numberx[2], y: numbery[2] },
+        { x: numberx[3], y: numbery[3] },
+      ];
+      const equation = `y=(${a}x+${b})/(${c}x+${d})`;
+      points.forEach((point, index) => {
+        calculator.setExpression({
+          id: `point${index + 1}`,
+          latex: `(${point.x},${point.y})`,
+        });
+      });
+      // Add the point
+      calculator.setExpression({
+        id: `point${i}`,
+        latex: `(${points.x},${points.y})`,
+      });
+
+      // Add the equation
+      calculator.setExpression({
+        id: "eq1",
+        latex: equation,
+      });
+      calculator.setExpression({
+        id: "eq2",
+        latex: `y=${a / c}`,
+      });
+      calculator.setExpression({
+        id: "eq3",
+        latex: `x= ${-d / c}`,
+      });
     </script>
   </body>
 </html>
