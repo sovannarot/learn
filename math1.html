@@ -638,6 +638,16 @@
           break;
         }
       }
+      for (let i = 0; i < numberx.length; i++) {
+        while (numberx.indexOf(numberx[i]) !== i) {
+          numberx.splice(i, 1);
+        }
+      }
+      for (let i = 0; i < numbery.length; i++) {
+        while (numbery.indexOf(numbery[i]) !== i) {
+          numbery.splice(i, 1);
+        }
+      }
       if (numberx.length == 4) {
         document.getElementById(
           "numberx"
@@ -684,8 +694,6 @@
           latex: `(${point.x},${point.y})`,
         });
       });
-      // Add the point
-
       // Add the equation
       calculator.setExpression({
         id: "eq1",
