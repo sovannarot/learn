@@ -31,13 +31,20 @@
         background: white;
         font-family: "Khmer", sans-serif;
       }
+      .show {
+        display: flex;
+        flex-direction: column;
+      }
+      .hide {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div
       style="
         width: 100vw;
-        height: 100svh;
+        height: auto;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -61,9 +68,18 @@
       >
         បង្កើតលំហាត់
       </button>
-      <h2 id="answer"></h2>
+      <div class="hide" id="proofSection">
+        <h2 id="first"></h2>
+        <h2 id="second"></h2>
+        <h2 id="third"></h2>
+        <h2 id="fourth"></h2>
+        <h2 id="fifth"></h2>
+        <h2 id="sixth"></h2>
+        <h2 id="seventh"></h2>
+        <h2 id="eighth"></h2>
+      </div>
       <button
-        id="answer-button"
+        id="proof-button"
         style="
           background: blue;
           color: white;
@@ -74,20 +90,30 @@
           font-size: larger;
         "
       >
-        ចម្លើយ
+        ដំណោះស្រាយ
       </button>
     </div>
-    <div
-      id="calculator"
-      style="width: 600px; height: 400px; margin: auto"
-    ></div>
     <script>
       let answer;
+      let fractionProof = [];
+      let fraction;
       document.getElementById("generate").addEventListener("click", () => {
         if (answer) {
           answer = undefined;
-          document.getElementById("answer").innerHTML = "";
-        } 
+        }
+        if (fractionProof.length !== 0) {
+          fractionProof = [];
+          document.getElementById("first").innerHTML = "";
+          document.getElementById("second").innerHTML = "";
+          document.getElementById("third").innerHTML = "";
+          document.getElementById("fourth").innerHTML = "";
+          document.getElementById("fifth").innerHTML = "";
+          document.getElementById("sixth").innerHTML = "";
+          document.getElementById("seventh").innerHTML = "";
+          document.getElementById("eighth").innerHTML = "";
+          document.getElementById("proofSection").classList.remove("show");
+          document.getElementById("proofSection").classList.add("hide");
+        }
         const denominator = [2, 3, 4, 6];
         const randomIndex = Math.floor(Math.random() * 4);
         const coefficient = Math.floor(Math.random() * 40) + 1;
@@ -120,53 +146,156 @@
         const numerator =
           coefficient * denominator[randomIndex] + remainder[randomRemainder];
         const randomOperation = Math.floor(Math.random() * 2) === 0;
-        if (remainder.length === 0) {
-          document.getElementById("problem").innerHTML = randomOperation
-            ? `\\[\\sin (${coefficient}π)\\]`
-            : `\\[\\cos (${coefficient}π)\\]`;
-          MathJax.typesetPromise();
-          answer = randomOperation
-            ? Math.sin(coefficient * Math.PI)
-            : Math.cos(coefficient * Math.PI);
-        } else {
-          document.getElementById("problem").innerHTML = randomOperation
-            ? `\\[\\sin (\\frac{${numerator}π}{${denominator[randomIndex]}})\\]`
-            : `\\[\\cos (\\frac{${numerator}π}{${denominator[randomIndex]}})\\]`;
-          MathJax.typesetPromise();
-          answer = randomOperation
-            ? Math.sin((numerator / denominator[randomIndex]) * Math.PI)
-            : Math.cos((numerator / denominator[randomIndex]) * Math.PI);
-        }
+        document.getElementById("problem").innerHTML = randomOperation
+          ? `\\[\\sin (\\frac{${numerator}π}{${denominator[randomIndex]}})\\]`
+          : `\\[\\cos (\\frac{${numerator}π}{${denominator[randomIndex]}})\\]`;
+        MathJax.typesetPromise();
+        answer = randomOperation
+          ? Math.sin((numerator / denominator[randomIndex]) * Math.PI)
+          : Math.cos((numerator / denominator[randomIndex]) * Math.PI);
+        fractionProof = [
+          randomOperation ? "sin" : "cos",
+          numerator,
+          denominator[randomIndex],
+          coefficient,
+          remainder[randomRemainder],
+        ];
       });
-      document.getElementById("answer-button").addEventListener("click", () => {
-        let fraction;
-        let absAnswer = Math.abs(answer).toFixed(6);
-        if (answer < 0) {
-          if (absAnswer === "0.707107") {
-            fraction = `\\[-\\frac{\\sqrt{2}}{2}\\]`;
-          } else if (absAnswer == "0.500000") {
-            fraction = `\\[-\\frac{1}{2}\\]`;
-          } else if (absAnswer == "1.000000") {
-            fraction = `\\[-1\\]`;
-          } else if (absAnswer == "0.866025") {
-            fraction = `\\[-\\frac{\\sqrt{3}}{2}\\]`;
-          } else if (absAnswer == "0.000000") {
-            fraction = `\\[0\\]`;
-          }
-        } else {
-          if (absAnswer === "0.707107") {
-            fraction = `\\[\\frac{\\sqrt{2}}{2}\\]`;
-          } else if (absAnswer == "0.500000") {
-            fraction = `\\[\\frac{1}{2}\\]`;
-          } else if (absAnswer == "1.000000") {
-            fraction = `\\[1\\]`;
-          } else if (absAnswer == "0.866025") {
-            fraction = `\\[\\frac{\\sqrt{3}}{2}\\]`;
-          } else if (absAnswer == "0.000000") {
-            fraction = `\\[0\\]`;
+      document.getElementById("proof-button").addEventListener("click", () => {
+        document.getElementById("proofSection").classList.remove("hide");
+        document.getElementById("proofSection").classList.add("show");
+        if (answer) {
+          let absAnswer = Math.abs(answer).toFixed(6);
+          if (answer < 0) {
+            if (absAnswer === "0.707107") {
+              fraction = `\\[-\\frac{\\sqrt{2}}{2}\\]`;
+            } else if (absAnswer == "0.500000") {
+              fraction = `\\[-\\frac{1}{2}\\]`;
+            } else if (absAnswer == "1.000000") {
+              fraction = `\\[-1\\]`;
+            } else if (absAnswer == "0.866025") {
+              fraction = `\\[-\\frac{\\sqrt{3}}{2}\\]`;
+            } else if (absAnswer == "0.000000") {
+              fraction = `\\[0\\]`;
+            }
+          } else {
+            if (absAnswer === "0.707107") {
+              fraction = `\\[\\frac{\\sqrt{2}}{2}\\]`;
+            } else if (absAnswer == "0.500000") {
+              fraction = `\\[\\frac{1}{2}\\]`;
+            } else if (absAnswer == "1.000000") {
+              fraction = `\\[1\\]`;
+            } else if (absAnswer == "0.866025") {
+              fraction = `\\[\\frac{\\sqrt{3}}{2}\\]`;
+            } else if (absAnswer == "0.000000") {
+              fraction = `\\[0\\]`;
+            }
           }
         }
-        document.getElementById("answer").innerHTML = fraction;
+        if (fractionProof.length !== 0) {
+          const operation = fractionProof[0];
+          const numerator = fractionProof[1];
+          const denominator = fractionProof[2];
+          const coefficient = fractionProof[3];
+          const remainder = fractionProof[4];
+          console.log(operation, numerator, denominator, remainder);
+          document.getElementById("first").innerHTML =
+            operation === "sin"
+              ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+              : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
+
+          if (remainder === 1) {
+            const divide =
+              (numerator - 1) / denominator === 1
+                ? ""
+                : (numerator - 1) / denominator;
+            const period =
+              ((numerator - 1) / denominator) % 2 === 0
+                ? ""
+                : `${(numerator - 1) / denominator - 1}π + π + `;
+            document.getElementById("second").innerHTML =
+              operation === "sin"
+                ? `\\[\\sin (\\frac{${numerator - 1}π + π}{${denominator}})\\]`
+                : `\\[\\cos (\\frac{${numerator - 1}π + π}{${denominator}})\\]`;
+            document.getElementById("third").innerHTML =
+              operation === "sin"
+                ? `\\[\\sin (${divide}π + \\frac{π}{${denominator}})\\]`
+                : `\\[\\cos (${divide}π + \\frac{π}{${denominator}})\\]`;
+            document.getElementById("fourth").innerHTML =
+              (numerator - 1) / denominator === 1
+                ? operation === "sin"
+                  ? `\\[\\sin (\\frac{π}{${denominator}})\\]`
+                  : `\\[\\cos (\\frac{π}{${denominator}})\\]`
+                : operation === "sin"
+                ? `\\[\\sin (${period} \\frac{π}{${denominator}})\\]`
+                : `\\[\\cos (${period} \\frac{π}{${denominator}})\\]`;
+            document.getElementById("fifth").innerHTML =
+              (numerator - 1) / denominator === 1
+                ? fraction
+                : ((numerator - 1) / denominator) % 2 === 0
+                ? fraction
+                : operation === "sin"
+                ? `\\[\\sin (π + \\frac{π}{${denominator}})\\]`
+                : `\\[\\cos (π + \\frac{π}{${denominator}})\\]`;
+            if (
+              (numerator - 1) / denominator !== 1 &&
+              ((numerator - 1) / denominator) % 2 !== 0
+            ) {
+              document.getElementById("sixth").innerHTML =
+                operation === "sin"
+                  ? `\\[-\\sin (\\frac{π}{${denominator}})\\]`
+                  : `\\[-\\cos (\\frac{π}{${denominator}})\\]`;
+              document.getElementById("seventh").innerHTML = fraction;
+            }
+          } else {
+            const divide =
+              (numerator + 1) / denominator === 1
+                ? ""
+                : (numerator + 1) / denominator;
+            const period =
+              ((numerator + 1) / denominator) % 2 === 0
+                ? "-"
+                : `${(numerator + 1) / denominator - 1}π + π - `;
+            document.getElementById("second").innerHTML =
+              operation === "sin"
+                ? `\\[\\sin (\\frac{${numerator + 1}π - π}{${denominator}})\\]`
+                : `\\[\\cos (\\frac{${numerator + 1}π - π}{${denominator}})\\]`;
+            document.getElementById("third").innerHTML =
+              operation === "sin"
+                ? `\\[\\sin (${divide}π - \\frac{π}{${denominator}})\\]`
+                : `\\[\\cos (${divide}π - \\frac{π}{${denominator}})\\]`;
+            document.getElementById("fourth").innerHTML =
+              (numerator + 1) / denominator === 1
+                ? operation === "sin"
+                  ? `\\[\\sin (-\\frac{π}{${denominator}})\\]`
+                  : `\\[\\cos (-\\frac{π}{${denominator}})\\]`
+                : operation === "sin"
+                ? `\\[\\sin (${period} \\frac{π}{${denominator}})\\]`
+                : `\\[\\cos (${period} \\frac{π}{${denominator}})\\]`;
+            document.getElementById("fifth").innerHTML =
+              (numerator + 1) / denominator === 1
+                ? fraction
+                : ((numerator + 1) / denominator) % 2 === 0
+                ? fraction
+                : operation === "sin"
+                ? `\\[\\sin (π - \\frac{π}{${denominator}})\\]`
+                : `\\[\\cos (π - \\frac{π}{${denominator}})\\]`;
+            if (
+              (numerator + 1) / denominator !== 1 &&
+              ((numerator + 1) / denominator) % 2 !== 0
+            ) {
+              document.getElementById("sixth").innerHTML =
+                operation === "sin"
+                  ? `\\[-\sin (-\\frac{π}{${denominator}})\\]`
+                  : `\\[-\cos (-\\frac{π}{${denominator}})\\]`;
+              document.getElementById("seventh").innerHTML =
+                operation === "sin"
+                  ? `\\[\\sin (\\frac{π}{${denominator}})\\]`
+                  : `\\[-\\cos (\\frac{π}{${denominator}})\\]`;
+              document.getElementById("eighth").innerHTML = fraction;
+            }
+          }
+        }
         MathJax.typesetPromise();
       });
     </script>
