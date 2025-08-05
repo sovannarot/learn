@@ -67,13 +67,22 @@
         <label for="operation">sin</label>
         <input type="radio" id="operation" name="operation" value="cos" />
         <label for="operation">cos</label>
+        <input type="radio" id="operation" name="operation" value="tan" />
+        <label for="operation">tan</label>
+        <input type="radio" id="operation" name="operation" value="cot" />
+        <label for="operation">cot</label>
       </div>
-      <input type="number" id="numerator" placeholder="ភាគយក" />
-      <select id="denominator">
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="6">6</option>
+      <input
+        type="number"
+        id="numerator"
+        placeholder="ភាគយក"
+        style="width: auto; padding: 10px 20px"
+      />
+      <select id="denominator" style="width: auto; padding: 10px 20px">
+        <option value="2">ភាគបែង 2</option>
+        <option value="3">ភាគបែង 3</option>
+        <option value="4">ភាគបែង 4</option>
+        <option value="6">ភាគបែង 6</option>
       </select>
       <div class="hide" id="proofSection">
         <h2 id="zero"></h2>
@@ -116,7 +125,19 @@
     </div>
     <script>
       let fraction;
+      let bollean = false;
       document.getElementById("proof-button").addEventListener("click", () => {
+        if (bollean) {
+          document.getElementById("zero").innerText = "";
+          document.getElementById("first").innerText = "";
+          document.getElementById("second").innerText = "";
+          document.getElementById("third").innerText = "";
+          document.getElementById("fourth").innerText = "";
+          document.getElementById("fifth").innerText = "";
+          document.getElementById("sixth").innerText = "";
+          document.getElementById("seventh").innerText = "";
+          document.getElementById("eighth").innerText = "";
+        }
         const operationInput = document.querySelector(
           'input[name="operation"]:checked'
         );
@@ -135,10 +156,18 @@
           alert("សូមបញ្ចូលលេខត្រឹមត្រូវ!");
           return;
         }
+        if (numerator < 1) {
+          alert("សូមបញ្ចូលលេខត្រឹមត្រូវជាលេខវិជ្ជមាន!");
+          return;
+        }
         let answer =
           operation === "sin"
             ? Math.sin((numerator / denominator) * Math.PI)
-            : Math.cos((numerator / denominator) * Math.PI);
+            : operation === "cos"
+            ? Math.cos((numerator / denominator) * Math.PI)
+            : operation === "tan"
+            ? Math.tan((numerator / denominator) * Math.PI)
+            : 1 / Math.tan((numerator / denominator) * Math.PI);
         if (answer) {
           let absAnswer = Math.abs(answer).toFixed(6);
           if (answer < 0) {
@@ -152,6 +181,12 @@
               fraction = `\\[-\\frac{\\sqrt{3}}{2}\\]`;
             } else if (absAnswer == "0.000000") {
               fraction = `\\[0\\]`;
+            } else if (absAnswer == "1.732051") {
+              fraction = `\\[-\\sqrt{3}\\]`;
+            } else if (absAnswer == "0.577350") {
+              fraction = `\\[-\\frac{\\sqrt{3}}{3}\\]`;
+            } else {
+              fraction = `\\[\\pm\\infty\\]`;
             }
           } else {
             if (absAnswer === "0.707107") {
@@ -164,6 +199,12 @@
               fraction = `\\[\\frac{\\sqrt{3}}{2}\\]`;
             } else if (absAnswer == "0.000000") {
               fraction = `\\[0\\]`;
+            } else if (absAnswer == "1.732050") {
+              fraction = `\\[\\sqrt{3}\\]`;
+            } else if (absAnswer == "0.577350") {
+              fraction = `\\[\\frac{\\sqrt{3}}{3}\\]`;
+            } else {
+              fraction = `\\[\\pm\\infty\\]`;
             }
           }
         }
@@ -184,7 +225,6 @@
             const denominator = fractionProof[2];
             const coefficient = fractionProof[3];
             const remainder = fractionProof[4];
-            console.log(operation, numerator, denominator, remainder);
             document.getElementById("first").innerHTML =
               operation === "sin"
                 ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
@@ -280,8 +320,8 @@
               ) {
                 document.getElementById("sixth").innerHTML =
                   operation === "sin"
-                    ? `\\[-\sin (-\\frac{π}{${denominator}})\\]`
-                    : `\\[-\cos (-\\frac{π}{${denominator}})\\]`;
+                    ? `\\[-\\sin (-\\frac{π}{${denominator}})\\]`
+                    : `\\[-\\cos (-\\frac{π}{${denominator}})\\]`;
                 document.getElementById("seventh").innerHTML =
                   operation === "sin"
                     ? `\\[\\sin (\\frac{π}{${denominator}})\\]`
@@ -292,123 +332,338 @@
           }
           MathJax.typesetPromise();
         }
-        if (denominator !== 6 && denominator !== 4) {
-          if (numerator % denominator !== 0) {
-            fractionProof(operation, numerator, denominator);
+        function fractionProofTan(operation, numerator, denominator) {
+          let fractionProofTan = [
+            operation,
+            numerator,
+            denominator,
+            (numerator - (numerator % denominator)) / denominator,
+            numerator % denominator,
+          ];
+          if (fractionProofTan.length !== 0) {
+            const operation = fractionProofTan[0];
+            const numerator = fractionProofTan[1];
+            const denominator = fractionProofTan[2];
+            const coefficient = fractionProofTan[3];
+            const remainder = fractionProofTan[4];
+            document.getElementById("first").innerHTML =
+              operation === "tan"
+                ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+            if (remainder === 1) {
+              document.getElementById("second").innerHTML =
+                operation === "tan"
+                  ? `\\[\\tan (\\frac{${
+                      numerator - 1
+                    }π + π}{${denominator}})\\]`
+                  : `\\[\\cot (\\frac{${
+                      numerator - 1
+                    }π + π}{${denominator}})\\]`;
+              if (coefficient !== 1) {
+                document.getElementById("third").innerHTML =
+                  operation === "tan"
+                    ? `\\[\\tan (${coefficient}π + \\frac{π}{${denominator}})\\]`
+                    : `\\[\\cot (${coefficient}π + \\frac{π}{${denominator}})\\]`;
+              } else {
+                document.getElementById("third").innerHTML =
+                  operation === "tan"
+                    ? `\\[\\tan (π + \\frac{π}{${denominator}})\\]`
+                    : `\\[\\cot (π + \\frac{π}{${denominator}})\\]`;
+              }
+              document.getElementById("fourth").innerHTML =
+                operation === "tan"
+                  ? `\\[\\tan (\\frac{π}{${denominator}})\\]`
+                  : `\\[\\cot (\\frac{π}{${denominator}})\\]`;
+              document.getElementById("fifth").innerHTML = fraction;
+            } else {
+              document.getElementById("second").innerHTML =
+                operation === "tan"
+                  ? `\\[\\tan (\\frac{${
+                      numerator + 1
+                    }π - π}{${denominator}})\\]`
+                  : `\\[\\cot (\\frac{${
+                      numerator + 1
+                    }π - π}{${denominator}})\\]`;
+              if (coefficient + 1 !== 1) {
+                document.getElementById("third").innerHTML =
+                  operation === "tan"
+                    ? `\\[\\tan (${
+                        coefficient + 1
+                      }π - \\frac{π}{${denominator}})\\]`
+                    : `\\[\\cot (${
+                        coefficient + 1
+                      }π - \\frac{π}{${denominator}})\\]`;
+              } else {
+                document.getElementById("third").innerHTML =
+                  operation === "tan"
+                    ? `\\[\\tan (π - \\frac{π}{${denominator}})\\]`
+                    : `\\[\\cot (π - \\frac{π}{${denominator}})\\]`;
+              }
+              document.getElementById("fourth").innerHTML =
+                operation === "tan"
+                  ? `\\[\\tan (-\\frac{π}{${denominator}})\\]`
+                  : `\\[\\cot (-\\frac{π}{${denominator}})\\]`;
+              document.getElementById("fifth").innerHTML =
+                operation === "tan"
+                  ? `\\[-\\tan (\\frac{π}{${denominator}})\\]`
+                  : `\\[-\\cot (\\frac{π}{${denominator}})\\]`;
+              document.getElementById("sixth").innerHTML = fraction;
+            }
+          }
+        }
+        if (numerator === 1) {
+          if (operation === "tan" || operation === "cot") {
+            document.getElementById("first").innerHTML =
+              operation === "tan"
+                ? `\\[\\tan (\\frac{π}{${denominator}})\\]`
+                : `\\[\\cot (\\frac{π}{${denominator}})\\]`;
+            document.getElementById("second").innerHTML = fraction;
+            MathJax.typesetPromise();
+          } else {
+            document.getElementById("first").innerHTML =
+              operation === "sin"
+                ? `\\[\\sin (\\frac{π}{${denominator}})\\]`
+                : `\\[\\cos (\\frac{π}{${denominator}})\\]`;
+            document.getElementById("second").innerHTML = fraction;
+            MathJax.typesetPromise();
+          }
+        } else if (numerator !== denominator && numerator !== 1) {
+          if (denominator !== 6 && denominator !== 4) {
+            if (numerator % denominator !== 0) {
+              if (operation === "tan" || operation === "cot") {
+                fractionProofTan(operation, numerator, denominator);
+              } else {
+                fractionProof(operation, numerator, denominator);
+              }
+            } else {
+              if (operation === "tan" || operation === "cot") {
+                document.getElementById("first").innerHTML =
+                  operation === "tan"
+                    ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                    : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+                document.getElementById("second").innerHTML =
+                  operation === "tan"
+                    ? `\\[\\tan (${numerator / denominator}π)\\]`
+                    : `\\[\\cot (${numerator / denominator}π)\\]`;
+                document.getElementById("third").innerHTML =
+                  operation === "tan" ? `\\[\\tan (0)\\]` : `\\[\\cot (0)\\]`;
+                document.getElementById("fourth").innerHTML = fraction;
+              } else {
+                document.getElementById("first").innerHTML =
+                  operation === "sin"
+                    ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+                    : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
+                document.getElementById("second").innerHTML =
+                  operation === "sin"
+                    ? `\\[\\sin (${numerator / denominator}π)\\]`
+                    : `\\[\\cos (${numerator / denominator}π)\\]`;
+                if ((numerator / denominator) % 2 !== 0) {
+                  document.getElementById("third").innerHTML =
+                    operation === "sin"
+                      ? `\\[\\sin (${numerator / denominator - 1}π + π)\\]`
+                      : `\\[\\cos (${numerator / denominator - 1}π + π)\\]`;
+                  document.getElementById("fourth").innerHTML =
+                    operation === "sin" ? `\\[\\sin (π)\\]` : `\\[\\cos (π)\\]`;
+
+                  document.getElementById("fifth").innerHTML = fraction;
+                } else {
+                  document.getElementById("third").innerHTML =
+                    operation === "sin" ? `\\[\\sin (0)\\]` : `\\[\\cos (0)\\]`;
+                  document.getElementById("fourth").innerHTML =
+                    operation === "sin" ? `\\[0\\]` : `\\[1\\]`;
+                  document.getElementById("fifth").innerHTML = "";
+                }
+                MathJax.typesetPromise();
+              }
+            }
+            MathJax.typesetPromise();
+          } else if (denominator === 6) {
+            if (numerator % 2 !== 0) {
+              if (numerator % 3 !== 0) {
+                if (operation === "tan" || operation === "cot") {
+                  fractionProofTan(operation, numerator, denominator);
+                } else {
+                  fractionProof(operation, numerator, denominator);
+                }
+              } else {
+                if (operation === "tan" || operation === "cot") {
+                  document.getElementById("zero").innerHTML =
+                    operation === "tan"
+                      ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+                  fractionProofTan(operation, numerator / 3, denominator / 3);
+                } else {
+                  document.getElementById("zero").innerHTML =
+                    operation === "sin"
+                      ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
+                  fractionProof(operation, numerator / 3, denominator / 3);
+                }
+              }
+            } else {
+              if (numerator % 3 !== 0) {
+                if (operation === "tan" || operation === "cot") {
+                  document.getElementById("zero").innerHTML =
+                    operation === "tan"
+                      ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+                  fractionProofTan(operation, numerator / 2, denominator / 2);
+                } else {
+                  document.getElementById("zero").innerHTML =
+                    operation === "sin"
+                      ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
+                  fractionProof(operation, numerator / 2, denominator / 2);
+                }
+              } else {
+                if (operation === "tan" || operation === "cot") {
+                  document.getElementById("first").innerHTML =
+                    operation === "tan"
+                      ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+                  document.getElementById("second").innerHTML =
+                    operation === "tan"
+                      ? `\\[\\tan (${numerator / denominator}π)\\]`
+                      : `\\[\\cot (${numerator / denominator}π)\\]`;
+                  document.getElementById("third").innerHTML =
+                    operation === "tan" ? `\\[\\tan (0)\\]` : `\\[\\cot (0)\\]`;
+                  document.getElementById("fourth").innerHTML = fraction;
+                } else {
+                  document.getElementById("first").innerHTML =
+                    operation === "sin"
+                      ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
+                  document.getElementById("second").innerHTML =
+                    operation === "sin"
+                      ? `\\[\\sin (${numerator / denominator}π)\\]`
+                      : `\\[\\cos (${numerator / denominator}π)\\]`;
+                  if ((numerator / denominator) % 2 !== 0) {
+                    document.getElementById("third").innerHTML =
+                      operation === "sin"
+                        ? `\\[\\sin (${numerator / denominator - 1}π + π)\\]`
+                        : `\\[\\cos (${numerator / denominator - 1}π + π)\\]`;
+                    document.getElementById("fourth").innerHTML =
+                      operation === "sin"
+                        ? `\\[\\sin (π)\\]`
+                        : `\\[\\cos (π)\\]`;
+
+                    document.getElementById("fifth").innerHTML = fraction;
+                  } else {
+                    document.getElementById("third").innerHTML =
+                      operation === "sin"
+                        ? `\\[\\sin (0)\\]`
+                        : `\\[\\cos (0)\\]`;
+                    document.getElementById("fourth").innerHTML =
+                      operation === "sin" ? `\\[0\\]` : `\\[1\\]`;
+                    document.getElementById("fifth").innerHTML = "";
+                    MathJax.typesetPromise();
+                  }
+                }
+              }
+            }
+            MathJax.typesetPromise();
+          } else if (denominator === 4) {
+            if (numerator % 2 !== 0) {
+              if (operation === "tan" || operation === "cot") {
+                fractionProofTan(operation, numerator, denominator);
+              } else {
+                fractionProof(operation, numerator, denominator);
+              }
+            } else {
+              if (numerator % 4 === 0) {
+                if (operation === "tan" || operation === "cot") {
+                  document.getElementById("first").innerHTML =
+                    operation === "tan"
+                      ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+                  document.getElementById("second").innerHTML =
+                    operation === "tan"
+                      ? `\\[\\tan (${numerator / denominator}π)\\]`
+                      : `\\[\\cot (${numerator / denominator}π)\\]`;
+                  document.getElementById("third").innerHTML =
+                    operation === "tan" ? `\\[\\tan (0)\\]` : `\\[\\cot (0)\\]`;
+                  document.getElementById("fourth").innerHTML = fraction;
+                  MathJax.typesetPromise();
+                } else {
+                  document.getElementById("first").innerHTML =
+                    operation === "sin"
+                      ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
+                  document.getElementById("second").innerHTML =
+                    operation === "sin"
+                      ? `\\[\\sin (${numerator / denominator}π)\\]`
+                      : `\\[\\cos (${numerator / denominator}π)\\]`;
+                  if ((numerator / denominator) % 2 !== 0) {
+                    document.getElementById("third").innerHTML =
+                      operation === "sin"
+                        ? `\\[\\sin (${numerator / denominator - 1}π + π)\\]`
+                        : `\\[\\cos (${numerator / denominator - 1}π + π)\\]`;
+                    document.getElementById("fourth").innerHTML =
+                      operation === "sin"
+                        ? `\\[\\sin (π)\\]`
+                        : `\\[\\cos (π)\\]`;
+
+                    document.getElementById("fifth").innerHTML = fraction;
+                    MathJax.typesetPromise();
+                  } else {
+                    document.getElementById("third").innerHTML =
+                      operation === "sin"
+                        ? `\\[\\sin (0)\\]`
+                        : `\\[\\cos (0)\\]`;
+                    document.getElementById("fourth").innerHTML =
+                      operation === "sin" ? `\\[0\\]` : `\\[1\\]`;
+                    document.getElementById("fifth").innerHTML = "";
+                    MathJax.typesetPromise();
+                  }
+                }
+              } else {
+                if (operation === "tan" || operation === "cot") {
+                  document.getElementById("zero").innerHTML =
+                    operation === "tan"
+                      ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+                  fractionProofTan(operation, numerator / 2, denominator / 2);
+                } else {
+                  document.getElementById("zero").innerHTML =
+                    operation === "sin"
+                      ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+                      : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
+                  fractionProof(operation, numerator / 2, denominator / 2);
+                }
+              }
+            }
+            MathJax.typesetPromise();
+          }
+        } else {
+          if (operation === "tan" || operation === "cot") {
+            document.getElementById("first").innerHTML =
+              operation === "tan"
+                ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+            document.getElementById("second").innerHTML =
+              operation === "tan" ? `\\[\\tan (π)\\]` : `\\[\\cot (π)\\]`;
+            document.getElementById("third").innerHTML =
+              operation === "tan" ? `\\[\\tan (0)\\]` : `\\[\\cot (0)\\]`;
+            document.getElementById("fourth").innerHTML = fraction;
+            MathJax.typesetPromise();
           } else {
             document.getElementById("first").innerHTML =
               operation === "sin"
                 ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
                 : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
             document.getElementById("second").innerHTML =
-              operation === "sin"
-                ? `\\[\\sin (${numerator / denominator}π)\\]`
-                : `\\[\\cos (${numerator / denominator}π)\\]`;
-            if ((numerator / denominator) % 2 !== 0) {
-              document.getElementById("third").innerHTML =
-                operation === "sin"
-                  ? `\\[\\sin (${numerator / denominator - 1}π + π)\\]`
-                  : `\\[\\cos (${numerator / denominator - 1}π + π)\\]`;
-              document.getElementById("fourth").innerHTML =
-                operation === "sin" ? `\\[\\sin (π)\\]` : `\\[\\cos (π)\\]`;
-
-              document.getElementById("fifth").innerHTML = fraction;
-            } else {
-              document.getElementById("third").innerHTML =
-                operation === "sin" ? `\\[\\sin (0)\\]` : `\\[\\cos (0)\\]`;
-              document.getElementById("fourth").innerHTML =
-                operation === "sin" ? `\\[0\\]` : `\\[1\\]`;
-              document.getElementById("fifth").innerHTML = "";
-            }
+              operation === "sin" ? `\\[\\sin (π)\\]` : `\\[\\cos (π)\\]`;
+            document.getElementById("third").innerHTML =
+              operation === "sin" ? `\\[-\\sin (0)\\]` : `\\[-\\cos (0)\\]`;
+            document.getElementById("fourth").innerHTML = fraction;
             MathJax.typesetPromise();
           }
-        } else if (denominator === 6) {
-          if (numerator % 2 !== 0) {
-            if (numerator % 3 !== 0) {
-              fractionProof(operation, numerator, denominator);
-            } else {
-              document.getElementById("zero").innerHTML =
-                operation === "sin"
-                  ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
-                  : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
-              fractionProof(operation, numerator / 3, denominator / 3);
-            }
-          } else {
-            if (numerator % 3 !== 0) {
-              document.getElementById("zero").innerHTML =
-                operation === "sin"
-                  ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
-                  : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
-              fractionProof(operation, numerator / 2, denominator / 2);
-            } else {
-              document.getElementById("first").innerHTML =
-                operation === "sin"
-                  ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
-                  : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
-              document.getElementById("second").innerHTML =
-                operation === "sin"
-                  ? `\\[\\sin (${numerator / denominator}π)\\]`
-                  : `\\[\\cos (${numerator / denominator}π)\\]`;
-              if ((numerator / denominator) % 2 !== 0) {
-                document.getElementById("third").innerHTML =
-                  operation === "sin"
-                    ? `\\[\\sin (${numerator / denominator - 1}π + π)\\]`
-                    : `\\[\\cos (${numerator / denominator - 1}π + π)\\]`;
-                document.getElementById("fourth").innerHTML =
-                  operation === "sin" ? `\\[\\sin (π)\\]` : `\\[\\cos (π)\\]`;
-
-                document.getElementById("fifth").innerHTML = fraction;
-              } else {
-                document.getElementById("third").innerHTML =
-                  operation === "sin" ? `\\[\\sin (0)\\]` : `\\[\\cos (0)\\]`;
-                document.getElementById("fourth").innerHTML =
-                  operation === "sin" ? `\\[0\\]` : `\\[1\\]`;
-                document.getElementById("fifth").innerHTML = "";
-                MathJax.typesetPromise();
-              }
-            }
-          }
-        } else {
-          if (numerator % 2 !== 0) {
-            fractionProof(operation, numerator, denominator);
-          } else {
-            if (numerator % 4 === 0) {
-              document.getElementById("first").innerHTML =
-                operation === "sin"
-                  ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
-                  : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
-              document.getElementById("second").innerHTML =
-                operation === "sin"
-                  ? `\\[\\sin (${numerator / denominator}π)\\]`
-                  : `\\[\\cos (${numerator / denominator}π)\\]`;
-              if ((numerator / denominator) % 2 !== 0) {
-                document.getElementById("third").innerHTML =
-                  operation === "sin"
-                    ? `\\[\\sin (${numerator / denominator - 1}π + π)\\]`
-                    : `\\[\\cos (${numerator / denominator - 1}π + π)\\]`;
-                document.getElementById("fourth").innerHTML =
-                  operation === "sin" ? `\\[\\sin (π)\\]` : `\\[\\cos (π)\\]`;
-
-                document.getElementById("fifth").innerHTML = fraction;
-              } else {
-                document.getElementById("third").innerHTML =
-                  operation === "sin" ? `\\[\\sin (0)\\]` : `\\[\\cos (0)\\]`;
-                document.getElementById("fourth").innerHTML =
-                  operation === "sin" ? `\\[0\\]` : `\\[1\\]`;
-                document.getElementById("fifth").innerHTML = "";
-                MathJax.typesetPromise();
-              }
-            } else {
-              document.getElementById("zero").innerHTML =
-                operation === "sin"
-                  ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
-                  : `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`;
-              fractionProof(operation, numerator / 2, denominator / 2);
-            }
-          }
         }
+        bollean = true;
       });
-      MathJax.typesetPromise();
+      window.addEventListener("load", () => {
+        MathJax.typesetPromise();
+      });
     </script>
   </body>
 </html>
