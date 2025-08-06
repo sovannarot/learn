@@ -90,21 +90,8 @@
           font-size: larger;
         "
       >
-        ដំណោះស្រាយ</button
-      ><a
-        href="https://sovannarot.github.io/learn/math3"
-        style="
-          background: blue;
-          color: white;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: larger;
-        "
-      >
-        Math3
-      </a>
+        ដំណោះស្រាយ
+      </button>
     </div>
     <script>
       let answer;
@@ -287,12 +274,15 @@
                 : `\\[\\cos (${period} \\frac{π}{${denominator}})\\]`;
             document.getElementById("fifth").innerHTML =
               (numerator + 1) / denominator === 1
-                ? fraction
+                ? operation === "sin"
+                  ? `\\[-\\sin (\\frac{π}{${denominator}})\\]`
+                  : `\\[\\cos (\\frac{π}{${denominator}})\\]`
                 : ((numerator + 1) / denominator) % 2 === 0
                 ? fraction
                 : operation === "sin"
                 ? `\\[\\sin (π - \\frac{π}{${denominator}})\\]`
                 : `\\[\\cos (π - \\frac{π}{${denominator}})\\]`;
+
             if (
               (numerator + 1) / denominator !== 1 &&
               ((numerator + 1) / denominator) % 2 !== 0
