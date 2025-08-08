@@ -62,6 +62,10 @@
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         min-height: 70svh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
       }
       .title {
         font-size: 1rem;
@@ -87,7 +91,7 @@
   <body>
     <div class="daily">
       <div class="title" style="margin-bottom: 20px">
-        <h1>ថ្ងៃនេះជាថ្ងៃ</h1>
+        <h1>ថ្ងៃនេះត្រូវជា</h1>
         <h1 id="date" style="color: crimson"></h1>
         <h1 id="hour"></h1>
       </div>
@@ -101,10 +105,17 @@
           <span style="color: crimson" id="taskdaily"></span>
         </p>
       </div>
+      <div class="task">
+        <p>
+          សកម្មភាពបន្ទាប់៖
+          <br />
+          <span style="color: crimson" id="taskdailynext"></span>
+        </p>
+      </div>
       <div
         class="task"
         id="workout"
-        style="background: rebeccapurple; flex-direction: column"
+        style="background: rgb(123, 63, 183); flex-direction: column"
       ></div>
     </div>
     <script>
@@ -117,15 +128,36 @@
         const second = now.getSeconds().toString().padStart(2, "0");
         hourElement.textContent = `${hours}:${minutes}:${second}`;
       }
+      const dayOfWeekList = [
+        "អាទិត្យ",
+        "ច័ន្ទ",
+        "អង្គារ",
+        "ពុធ",
+        "ព្រហសប្បតិ៍",
+        "សុក្រ",
+        "សៅរ៍",
+      ];
+      const monthList = [
+        "មករា",
+        "កុម្ភៈ",
+        "មីនា",
+        "មេសា",
+        "ឧសភា",
+        "មិថុនា",
+        "កក្កដា",
+        "សីហា",
+        "កញ្ញា",
+        "តុលា",
+        "វិច្ឆិកា",
+        "ធ្នូ",
+      ];
       document.addEventListener("DOMContentLoaded", function () {
         const dateElement = document.getElementById("date");
-        const options = {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        };
-        dateElement.textContent = Now.toLocaleDateString("km-KH", options);
+        dateElement.innerHTML = `ថ្ងៃ ${
+          dayOfWeekList[Now.getDay()]
+        } ទី ${Now.getDate().toString().padStart(2, "0")} ខែ ${
+          monthList[Now.getMonth()]
+        } ឆ្នាំ ${Now.getFullYear()}`;
       });
 
       const taskElement = document.getElementById("taskdaily");
@@ -138,7 +170,29 @@
         { title: "រៀនអេស្ប៉ាញ 🇪🇸", periodSat: 1, periodSun: 1 },
         { title: "សរសេរកូដ 💻", periodSat: 1, periodSun: 1 },
       ];
+      function countWeekdays() {
+        let startDate = "2025-08-11";
+        let endDate = `${Now.getFullYear()}-${(Now.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}-${Now.getDate().toString().padStart(2, "0")}`;
+        let count = 0;
+        let currentDate = new Date(startDate);
 
+        endDate = new Date(endDate);
+
+        // Loop through each day
+        while (currentDate <= endDate) {
+          const day = currentDate.getDay();
+          // 0 = Sunday, 6 = Saturday
+          if (day !== 0 && day !== 6) {
+            count++;
+          }
+          // Move to next day
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        return count;
+      }
       function generateMatrix10x3() {
         let matrix;
         let hasNonOne;
@@ -173,12 +227,12 @@
       }
       const startWorkout = new Date(2025, 7, 11).getTime();
       const msPerWeek = 7 * 24 * 60 * 60 * 1000;
-
       const nowTime = new Date(
         Now.getFullYear(),
         Now.getMonth(),
         Now.getDate()
       ).getTime();
+      const nextTask = document.getElementById("taskdailynext");
       const extraSetData = [
         {
           min: startWorkout,
@@ -207,8 +261,9 @@
         },
       ];
       const extraSet =
-        extraSetData.find((item) => nowTime >= item.min && nowTime < item.max)
-          ?.set || 0;
+        extraSetData.find(
+          (item) => Date.now() >= item.min && Date.now() < item.max
+        )?.set || 0;
 
       const workoutTask = [
         {
@@ -473,83 +528,108 @@
           getArray(localdata[10]),
         ],
       };
-      let numberTime = Math.floor((nowTime - datas.timestamp) / msPerWeek);
+      let numberTime = Math.floor((Date.now() - datas.timestamp) / msPerWeek);
       if (numberTime > 9) {
         setRandomWeek();
       }
       const satOrsun =
-        nowTime - datas.timestamp - msPerWeek * numberTime > 0 ? 1 : 0;
-
+        Date.now() - datas.timestamp - msPerWeek * numberTime - msPerWeek / 7 >
+        0
+          ? 1
+          : 0;
+      console.log(numberTime);
       setInterval(() => {
         updateTime();
         if (dayOfWeek !== 6 && dayOfWeek !== 7) {
           if (hour < 5 || (hour >= 23.5 && dayOfWeek !== 5)) {
             taskElement.textContent = "សូមមេត្តាចូលគេង 💤";
+            nextTask.textContent = "ហាត់ពុតខ្លួន 🧘";
           }
           if (hour >= 5 && hour < 5.5) {
             taskElement.textContent = "ហាត់ពុតខ្លួន 🧘";
+            nextTask.textContent = "រៀបចំខ្លួនទៅសាលា 🏫";
           }
           if (hour >= 5.5 && hour < 6) {
             taskElement.textContent = "រៀបចំខ្លួនទៅសាលា 🏫";
+            nextTask.textContent = "កំពុងរៀនគួរជីវៈវិទ្យា 📚";
           }
           if (hour >= 6 && hour < 7) {
             taskElement.textContent = "កំពុងរៀនគួរជីវៈវិទ្យា 📚";
+            nextTask.textContent = "កំពុងរៀនគួរគីមីវិទ្យា ⚛️";
           }
           if (hour >= 7 && hour < 8) {
             taskElement.textContent = "កំពុងរៀនគួរគីមីវិទ្យា ⚛️";
+            nextTask.textContent = "គ្មានសកម្មភាពទេ 😶";
           }
           if (hour >= 8 && hour < 9) {
             taskElement.textContent = "គ្មានសកម្មភាពទេ 😶";
+            nextTask.textContent = "កំពុងរៀនគួរគណិតវិទ្យា 🧮";
           }
           if (hour >= 9 && hour < 11) {
             taskElement.textContent = "កំពុងរៀនគួរគណិតវិទ្យា 🧮";
+            nextTask.textContent = "រំលឹកលំហាត់សិស្សពូកែ 📝";
           }
           if (hour >= 11 && hour < 13.5) {
             taskElement.textContent = "រំលឹកលំហាត់សិស្សពូកែ 📝";
+            nextTask.textContent = "រៀបចំខ្លួនទៅសាលា 🏫";
           }
           if (hour >= 13.5 && hour < 14) {
             taskElement.textContent = "រៀបចំខ្លួនទៅសាលា 🏫";
+            nextTask.textContent = "កំពុងរៀនគួរភាសាខ្មែរ 💌";
           }
           if (hour >= 14 && hour < 15.5) {
             taskElement.textContent = "កំពុងរៀនគួរភាសាខ្មែរ 💌";
+            nextTask.textContent = "គ្មានសកម្មភាពទេ 😶";
           }
           if (hour >= 15.5 && hour < 16) {
             taskElement.textContent = "គ្មានសកម្មភាពទេ 😶";
+            nextTask.textContent = "កំពុងរៀនគួររូបវិទ្យា 🌪️";
           }
           if (hour >= 16 && hour < 17) {
             taskElement.textContent = "កំពុងរៀនគួររូបវិទ្យា 🌪️";
+            nextTask.textContent = "ហាត់ប្រាណកាយ 🏋️";
           }
           if (hour >= 17 && hour < 19) {
             taskElement.textContent = "ហាត់ប្រាណកាយ 🏋️";
+            nextTask.textContent = "រៀនគណិតវិទ្យាពូកែ 🧮🧠";
           }
           if (hour >= 19 && hour < 23.5 && dayOfWeek !== 5) {
             taskElement.textContent = "រៀនគណិតវិទ្យាពូកែ 🧮🧠";
+            nextTask.textContent = "សូមមេត្តាចូលគេង 💤";
           }
           if (hour >= 19 && dayOfWeek == 5) {
             taskElement.textContent = "រៀនគណិតវិទ្យាពូកែ 🧮🧠";
+            nextTask.textContent = "សូមមេត្តាចូលគេង 💤";
           }
         } else {
           if (hour < 5.5 || (hour >= 23.5 && dayOfWeek !== 6)) {
             taskElement.textContent = "សូមមេត្តាចូលគេង 💤";
+            nextTask.textContent = "រត់ហាត់ប្រាណ 🏃";
           }
           if (hour >= 5.5 && hour < 6) {
             taskElement.textContent = "រត់ហាត់ប្រាណ 🏃";
+            nextTask.textContent = "គ្មានសកម្មភាពទេ 😶";
           }
           if (hour >= 6 && hour < 7) {
             taskElement.textContent = "គ្មានសកម្មភាពទេ 😶";
+            nextTask.textContent = "រៀនគណិតវិទ្យាពូកែ 🧮🧠";
           }
           if (hour >= 7 && hour < 13.5) {
             taskElement.textContent = "រៀនគណិតវិទ្យាពូកែ 🧮🧠";
+            nextTask.textContent = "តាំងសមាធិ 🧠";
           }
           if (hour >= 13.5 && hour < 14) {
             taskElement.textContent = "តាំងសមាធិ 🧠";
+            nextTask.textContent = "កំពុងធាក់កង់ 🚲";
           }
           if (hour >= 14 && hour < 19) {
             taskElement.textContent = "កំពុងធាក់កង់ 🚲";
+            nextTask.textContent = nightTask[dataOfWeek[0]].title;
           }
           if (dayOfWeek == 6) {
             if (hours >= 19 && hour < 19 + nightTask[dataOfWeek[0]].periodSat) {
               taskElement.textContent = nightTask[dataOfWeek[0]].title;
+              nextTask.textContent = nightTask[dataOfWeek[1]].title;
             }
             if (
               hours >= 19 + nightTask[dataOfWeek[0]].periodSat &&
@@ -559,6 +639,7 @@
                   nightTask[dataOfWeek[1]].periodSat
             ) {
               taskElement.textContent = nightTask[dataOfWeek[1]].title;
+              nextTask.textContent = nightTask[dataOfWeek[2]].title;
             }
             if (
               hours >=
@@ -572,10 +653,12 @@
                   nightTask[dataOfWeek[2]].periodSat
             ) {
               taskElement.textContent = nightTask[dataOfWeek[2]].title;
+              nextTask.textContent = "សូមមេត្តាចូលគេង 💤";
             }
           } else {
             if (hours >= 19 && hour < 19 + nightTask[dataOfWeek[0]].periodSun) {
               taskElement.textContent = nightTask[dataOfWeek[0]].title;
+              nextTask.textContent = nightTask[dataOfWeek[1]].title;
             }
             if (
               hours >= 19 + nightTask[dataOfWeek[0]].periodSun &&
@@ -585,6 +668,7 @@
                   nightTask[dataOfWeek[1]].periodSun
             ) {
               taskElement.textContent = nightTask[dataOfWeek[1]].title;
+              nextTask.textContent = nightTask[dataOfWeek[2]].title;
             }
             if (
               hours >=
@@ -598,19 +682,30 @@
                   nightTask[dataOfWeek[2]].periodSun
             ) {
               taskElement.textContent = nightTask[dataOfWeek[2]].title;
+              nextTask.textContent = "សូមមេត្តាចូលគេង 💤";
             }
           }
         }
       }, 1000);
       const mapsExercise = document.getElementById("workout");
-      if (dayOfWeek == 6 && dayOfWeek == 7) {
-        mapsExercise.style.display = "none";
-      } else {
+      if (dayOfWeek !== 6 && dayOfWeek !== 7 && hour >= 17 && hour < 19) {
         mapsExercise.style.display = "flex";
+      } else {
+        mapsExercise.style.display = "none";
       }
       const workoutTaskSelect = workoutTask[(dayOfWeek - 1) % 5];
       let defaultWorkout = `<p style="color: yellow">🧮 ការហាត់ប្រាណកាយ 🧠</p>`;
-      defaultWorkout += `<p style="color: yellowgreen">🏋️ ${workoutTaskSelect.title} 🏃</p>`;
+      defaultWorkout += `<p style="color: chartreuse">🏋️ ចាប់ផ្តើមពីថ្ងៃទី ១១ ខែ សីហា ឆ្នាំ ២០២៥ 🏃</p><p style="color: chartreuse">🏋️ បញ្ចប់នៅថ្ងៃទី ១៧ ខែ មករា ឆ្នាំ ២០២៦ 🏃</p><p style="color: red">🏋️ ហាត់បាន៖ ${countWeekdays()
+        .toString()
+        .padStart(3, "0")}ថ្ងៃ ត្រូវជាថ្ងៃទី ${Math.abs(
+        Math.floor(
+          (7 * (Date.now() - new Date(2025, 7, 11).getTime())) / msPerWeek
+        )
+      )
+        .toString()
+        .padStart(3, "0")} 🏃</p><p style="color: yellowgreen">🏋️ ${
+        workoutTaskSelect.title
+      } 🏃</p>`;
       const taskMake = (work) => {
         defaultWorkout += `
         <div
