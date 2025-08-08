@@ -108,6 +108,18 @@
           "sizes": "200x200"
         }
       ]
+    },
+    {
+      "name": "Daily Task: សកម្មភាពប្រចាំថ្ងៃ",
+      "short_name": "Daily Task",
+      "description": "Task For a Day To do",
+      "url": "/learn/src/html/daily.html",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/sovannarot/learn/main/assets/icon/task.png",
+          "sizes": "512x512"
+        }
+      ]
     }
   ]
 }
