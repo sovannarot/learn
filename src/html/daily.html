@@ -189,6 +189,10 @@
         localStorage.setItem("week", `${findSaturday()}:${createRandom()}`);
         location.reload();
       }
+      const weekdatatest = localStorage.getItem("week") || "";
+      if (weekdatatest === ""){
+        localStorage.setItem("week", `${new Date(2025,7,9).getTime()}:${createRandom()}`);
+      }
       const localdata = localStorage.getItem("week").split(":");
       const getArray = (param) => {
         let array = param.replace("{", "").replace("}", "").split(";");
@@ -221,7 +225,6 @@
           getArray(localdata[10]),
         ],
       };
-
       const numberTime = Math.floor((nowTime - datas.timestamp) / msPerWeek);
       if (numberTime > 9) {
         setRandomWeek();
