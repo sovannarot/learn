@@ -164,6 +164,7 @@
       const dayOfWeek = Now.getDay() === 0 ? 7 : Now.getDay();
       const hour = Now.getHours() + Now.getMinutes() / 60;
       const nightTask = [
+        { title: "គ្មានសកម្មភាព 😶", periodSat: 1, periodSun: 1 },
         { title: "រៀនគណិតវិទ្យាពូកែ 🧮🧠", periodSat: 3.5, periodSun: 3 },
         { title: "រៀនមុខវិទ្យាទូទៅ 📚🧠", periodSat: 1, periodSun: 1 },
         { title: "លេងកំសាន្ត 🀄", periodSat: 1, periodSun: 1 },
@@ -177,9 +178,7 @@
           .padStart(2, "0")}-${Now.getDate().toString().padStart(2, "0")}`;
         let count = 0;
         let currentDate = new Date(startDate);
-
         endDate = new Date(endDate);
-
         // Loop through each day
         while (currentDate <= endDate) {
           const day = currentDate.getDay();
@@ -190,7 +189,6 @@
           // Move to next day
           currentDate.setDate(currentDate.getDate() + 1);
         }
-
         return count;
       }
       function generateMatrix10x3() {
@@ -562,7 +560,7 @@
         0
           ? 1
           : 0;
-      console.log(numberTime);
+      const dataOfWeek = datas.data[numberTime][satOrsun] || [1, 2, 3];
       setInterval(() => {
         updateTime();
         if (dayOfWeek !== 6 && dayOfWeek !== 7) {
@@ -652,12 +650,12 @@
             nextTask.textContent = nightTask[dataOfWeek[0]].title;
           }
           if (dayOfWeek == 6) {
-            if (hours >= 19 && hour < 19 + nightTask[dataOfWeek[0]].periodSat) {
+            if (hour >= 19 && hour < 19 + nightTask[dataOfWeek[0]].periodSat) {
               taskElement.textContent = nightTask[dataOfWeek[0]].title;
               nextTask.textContent = nightTask[dataOfWeek[1]].title;
             }
             if (
-              hours >= 19 + nightTask[dataOfWeek[0]].periodSat &&
+              hour >= 19 + nightTask[dataOfWeek[0]].periodSat &&
               hour <
                 19 +
                   nightTask[dataOfWeek[0]].periodSat +
@@ -667,7 +665,7 @@
               nextTask.textContent = nightTask[dataOfWeek[2]].title;
             }
             if (
-              hours >=
+              hour >=
                 19 +
                   nightTask[dataOfWeek[0]].periodSat +
                   nightTask[dataOfWeek[1]].periodSat &&
@@ -681,12 +679,12 @@
               nextTask.textContent = "សូមមេត្តាចូលគេង 💤";
             }
           } else {
-            if (hours >= 19 && hour < 19 + nightTask[dataOfWeek[0]].periodSun) {
+            if (hour >= 19 && hour < 19 + nightTask[dataOfWeek[0]].periodSun) {
               taskElement.textContent = nightTask[dataOfWeek[0]].title;
               nextTask.textContent = nightTask[dataOfWeek[1]].title;
             }
             if (
-              hours >= 19 + nightTask[dataOfWeek[0]].periodSun &&
+              hour >= 19 + nightTask[dataOfWeek[0]].periodSun &&
               hour <
                 19 +
                   nightTask[dataOfWeek[0]].periodSun +
@@ -696,7 +694,7 @@
               nextTask.textContent = nightTask[dataOfWeek[2]].title;
             }
             if (
-              hours >=
+              hour >=
                 19 +
                   nightTask[dataOfWeek[0]].periodSun +
                   nightTask[dataOfWeek[1]].periodSun &&
