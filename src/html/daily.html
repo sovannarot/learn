@@ -172,24 +172,35 @@
         { title: "សរសេរកូដ 💻", periodSat: 1, periodSun: 1 },
       ];
       function countWeekdays() {
-        let startDate = "2025-08-11";
-        let endDate = `${Now.getFullYear()}-${(Now.getMonth() + 1)
-          .toString()
-          .padStart(2, "0")}-${Now.getDate().toString().padStart(2, "0")}`;
-        let count = 0;
-        let currentDate = new Date(startDate);
-        endDate = new Date(endDate);
-        // Loop through each day
-        while (currentDate <= endDate) {
-          const day = currentDate.getDay();
-          // 0 = Sunday, 6 = Saturday
-          if (day !== 0 && day !== 6) {
-            count++;
-          }
-          // Move to next day
-          currentDate.setDate(currentDate.getDate() + 1);
+        let startDate = new Date("2025-08-11");
+        let endDate = new Date(
+          `${Now.getFullYear()}-${(Now.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${Now.getDate().toString().padStart(2, "0")}`
+        );
+        const startDay = startDate.getDay();
+        const endDay = endDate.getDay();
+        const msPerDay = 1000 * 60 * 60 * 24;
+        let day =
+          (5 *
+            (startDay -
+              endDay -
+              7 +
+              (endDate.getTime() - startDate.getTime()) / msPerDay)) /
+          7;
+        if (startDay === 0) {
+          day += 5;
+        } else {
+          day += 6 - startDay;
         }
-        return count;
+        if (endDay === 7) {
+          day += 0;
+        } else if (endDay === 6) {
+          day += 5;
+        } else {
+          day += endDay;
+        }
+        return day;
       }
       function generateMatrix10x3() {
         let matrix;
@@ -720,10 +731,8 @@
       let defaultWorkout = `<p style="color: yellow">🧮 ការហាត់ប្រាណកាយ 🧠</p>`;
       defaultWorkout += `<p style="color: chartreuse">🏋️ ចាប់ផ្តើមពីថ្ងៃទី ១១ ខែ សីហា ឆ្នាំ ២០២៥ 🏃</p><p style="color: chartreuse">🏋️ បញ្ចប់នៅថ្ងៃទី ១៧ ខែ មករា ឆ្នាំ ២០២៦ 🏃</p><p style="color: red">🏋️ ហាត់បាន៖ ${countWeekdays()
         .toString()
-        .padStart(3, "0")}ថ្ងៃ ត្រូវជាថ្ងៃទី ${Math.abs(
-        Math.floor(
-          (7 * (Date.now() - new Date(2025, 7, 11).getTime())) / msPerWeek
-        )
+        .padStart(3, "0")}ថ្ងៃ ត្រូវជាថ្ងៃទី ${Math.floor(
+        (7 * (Date.now() - new Date(2025, 7, 10).getTime())) / msPerWeek
       )
         .toString()
         .padStart(3, "0")} 🏃</p><p style="color: yellowgreen">🏋️ ${
