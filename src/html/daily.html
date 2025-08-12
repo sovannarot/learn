@@ -246,22 +246,22 @@
         {
           min: startWorkout,
           max: startWorkout + 4 * msPerWeek,
-          set: 0,
+          set: -1,
         },
         {
           min: startWorkout + 4 * msPerWeek,
           max: startWorkout + 8 * msPerWeek,
-          set: 1,
+          set: 0,
         },
         {
           min: startWorkout + 8 * msPerWeek,
           max: startWorkout + 12 * msPerWeek,
-          set: 2,
+          set: 1,
         },
         {
           min: startWorkout + 12 * msPerWeek,
           max: startWorkout + 16 * msPerWeek,
-          set: 1,
+          set: 0,
         },
         {
           min: startWorkout + 16 * msPerWeek,
@@ -276,63 +276,63 @@
 
       const workoutTask = [
         {
-          title: "Upper A (Chest, Lats, Shoulder, Arms)",
+          title: "Upper A (Chest, Bicep, Tricep, Forarm)",
           exercise: [
             {
-              text: "Dumbbell Bench Press",
+              text: "Barbell Bench Press",
+              set: 3 + extraSet,
+              reps: "08-10 Reps",
+            },
+            {
+              text: "Incline Barbell Press",
+              set: 3 + extraSet,
+              reps: "08-10 Reps",
+            },
+            {
+              text: "Close-Grip Barbell Press",
+              set: 3 + extraSet,
+              reps: "08-12 Reps",
+            },
+            {
+              text: "Barbell Curl",
+              set: 3 + extraSet,
+              reps: "08-12 Reps",
+            },
+            {
+              text: "One-Arm Dumbbell Concentraton Curl",
+              set: 3 + extraSet,
+              reps: "10-12 Reps (each arm)",
+            },
+            {
+              text: "One-Arm Dumbbell Overhead Extension",
+              set: 3 + extraSet,
+              reps: "10-12 Reps (each arm)",
+            },
+            {
+              text: "Barbell Wrist Curl",
               set: 3 + extraSet,
               reps: "12-15 Reps",
-            },
-            {
-              text: "Bent-Over Dumbbell Rows (Neutral Grip)",
-              set: 3 + extraSet,
-              reps: "12-15 Reps Focus on squeezing lats",
-            },
-            {
-              text: "Seated Dumbbell Shoulder Press",
-              set: 3 + extraSet,
-              reps: "12-15 Reps",
-            },
-            {
-              text: "Lat Pulldowns",
-              set: 3 + extraSet,
-              reps: "Max Reps",
-            },
-            {
-              text: "Dumbbell Bicep Curls",
-              set: 3 + extraSet,
-              reps: "12-15 Reps",
-            },
-            {
-              text: "Overhead Dumbbell Triceps Extension",
-              set: 3 + extraSet,
-              reps: "12-15 Reps",
-            },
-            {
-              text: "Forarms Curl",
-              set: 3 + extraSet,
-              reps: "12-15 Reps",
-            },
-            {
-              text: "Crunches",
-              set: 3 + extraSet,
-              reps: "Max Reps Until Fail",
-            },
-            {
-              text: "Serratus Anterior",
-              set: 3 + extraSet,
-              reps: "10-15 Reps",
-            },
-            {
-              text: "Planks",
-              set: 3 + extraSet,
-              reps: "3 mins",
             },
           ],
         },
         {
-          title: "Lower (Quads, Hamstrings, Glutes, Calves)",
+          title: "Some Upper A + Lower (Quads, Hamstrings, Glutes, Calves)",
           exercise: [
+            {
+              text: "Barbell Bench Press",
+              set: 3 + extraSet,
+              reps: "08-10 Reps",
+            },
+            {
+              text: "Close-Grip Barbell Press",
+              set: 3 + extraSet,
+              reps: "08-12 Reps",
+            },
+            {
+              text: "Barbell Curl",
+              set: 3 + extraSet,
+              reps: "08-12 Reps",
+            },
             {
               text: "Goblet Squats (Dumbbell)",
               set: 3 + extraSet,
@@ -353,135 +353,150 @@
               set: 4 + extraSet,
               reps: "15-20 Reps Hold dumbbells, slow tempo",
             },
-            {
-              text: "Leg Split",
-              set: 4 + extraSet,
-              reps: "3 mins",
-            },
-            {
-              text: "Single Leg Balance",
-              set: 4 + extraSet,
-              reps: "3 mins",
-            },
-            {
-              text: "Roundhouse Kick / Double Jump",
-              set: 4 + extraSet,
-              reps: "5 mins",
-            },
           ],
         },
         {
-          title: "Push (Chest, shoulders, Triceps)",
+          title: "Upper B (Shoulders, Lats)",
           exercise: [
             {
-              text: "Incline Dumbbell Press",
+              text: "Barbell Overhead Press",
               set: 3 + extraSet,
-              reps: "12-15 Reps",
+              reps: "10-12 Reps",
             },
             {
-              text: "Standing Dumbbell Lateral Raises",
+              text: "Barbell Upright Row",
               set: 4 + extraSet,
-              reps: "12-15 Reps Light-moderate weight, strict form",
+              reps: "10-12 Reps",
             },
             {
-              text: "Close-Grip Bench Press (Bar)",
+              text: "One-Arm Dumbbell Lateral Raise",
               set: 3 + extraSet,
-              reps: "8-12 Reps Focus on triceps",
+              reps: "8-12 Reps",
             },
             {
-              text: "Dumbbell Front Raises",
+              text: "Barbell Front Raise",
               set: 3 + extraSet,
-              reps: "12-15 Reps",
+              reps: "08-10 Reps",
             },
             {
-              text: "Dumbbell Floor Press (or Decline Push-Ups)",
+              text: "Barbell Bent-Over Row",
               set: 3 + extraSet,
               reps: "10-15 Reps",
             },
             {
-              text: "Dumbbell Overhead Triceps Extension (Single Arm)",
+              text: "One-Arm Dumbbell Row",
               set: 3 + extraSet,
               reps: "10-12 Reps per arm",
             },
-          ],
-        },
-        {
-          title: "Pull (Lats, Rear Delts, Biceps) - LAT FOCUS",
-          exercise: [
             {
-              text: "Weight Bar Bent-Over Rows (Overhand Grip)",
-              set: 4 + extraSet,
-              reps: "15-20 Reps",
-            },
-            {
-              text: "Lat Pulldowns / Inverted Rows",
-              set: 4 + extraSet,
-              reps: "Max Reps Prioritize Lat Engagement",
-            },
-            {
-              text: "Dumbbell Face Pulls (Use dumbbell held vertically, pull towards face)",
-              set: 3 + extraSet,
-              reps: "15-20 Reps Rear Delts",
-            },
-            {
-              text: "Dumbbell Hammer Curl",
+              text: "Barbell DeadLift (Lats Focus)",
               set: 3 + extraSet,
               reps: "10-12 Reps",
             },
             {
-              text: "Dumbbell Shrugs",
+              text: "Dumbbell Pullover",
               set: 3 + extraSet,
-              reps: "15-20 Reps Hold squeeze at top",
+              reps: "10-12 Reps",
             },
           ],
         },
         {
-          title: "Upper B (Back, Thickness, Shoulders, Arms)",
+          title: "Upper C (Abs, Serratus Anterior)",
           exercise: [
             {
-              text: "Weight Bar Deadlifts (Conventional or Romanian)",
+              text: "Dumbbell Serratus Punch",
               set: 3 + extraSet,
-              reps: "5-8 Reps Focus on form & back tightness",
+              reps: "12-15 Reps (Each Arm)",
             },
             {
-              text: "Seated Dumbbell Arnold Press",
+              text: "Overhead Dumbbell Punches",
               set: 3 + extraSet,
-              reps: "10-12 Reps Great for shoulder development",
+              reps: "12-15 Reps (Each Arm)",
             },
             {
-              text: "Single-Arm Dumbbell Rows (Supportrd on bench)",
-              set: 3 + extraSet,
-              reps: "10-12 Reps per arm squeeze scapula",
-            },
-            {
-              text: "Standing Dumbbell Upright Rows (Narrow Grip)",
-              set: 3 + extraSet,
-              reps: "12-15 Reps Light Weight, avoid shoulder strain",
-            },
-            {
-              text: "Dumbbell Preacher Curls (Use bench incline)",
+              text: "Dumbbell Pullover",
               set: 3 + extraSet,
               reps: "10-12 Reps",
             },
             {
-              text: "Dumbbell Skull Crushers (or Bar Skull Crushers)",
+              text: "Scapular Push-Up",
               set: 3 + extraSet,
               reps: "10-12 Reps",
             },
             {
-              text: "Star Crunches",
+              text: "Barbell Rollout (from knees or standing)",
               set: 3 + extraSet,
-              reps: "Max Reps Until Fail",
+              reps: "08-12 Reps",
             },
             {
-              text: "Side Abs Workout",
+              text: "Crunches",
               set: 3 + extraSet,
-              reps: "20-25 Reps",
+              reps: "08-12 Reps",
             },
             {
-              text: "Planks",
+              text: "Weight Russian Twist",
               set: 3 + extraSet,
-              reps: "3 mins",
+              reps: "20-24 twists",
+            },
+            {
+              text: "Lying Leg Raise",
+              set: 3 + extraSet,
+              reps: "20-24 Reps",
+            },
+            {
+              text: "Plank",
+              set: 3 + extraSet,
+              reps: "2 mins",
+            },
+          ],
+        },
+        {
+          title: "Upper D (Forarms, Abs)",
+          exercise: [
+            {
+              text: "Dumbbell Pullover",
+              set: 3 + extraSet,
+              reps: "10-12 Reps",
+            },
+            {
+              text: "Barbell Wrist Curl",
+              set: 3 + extraSet,
+              reps: "12-15 Reps",
+            },
+            {
+              text: "Barbell Reverse Wrist Curl",
+              set: 3 + extraSet,
+              reps: "12-15 Reps",
+            },
+            {
+              text: "Dumbbell Wrist Rotation",
+              set: 3 + extraSet,
+              reps: "20-22 Reps (Each Arm)",
+            },
+            {
+              text: "Barbell Rollout (from knees or standing)",
+              set: 3 + extraSet,
+              reps: "08-12 Reps",
+            },
+            {
+              text: "Crunches",
+              set: 3 + extraSet,
+              reps: "08-12 Reps",
+            },
+            {
+              text: "Weight Russian Twist",
+              set: 3 + extraSet,
+              reps: "20-24 twists",
+            },
+            {
+              text: "Lying Leg Raise",
+              set: 3 + extraSet,
+              reps: "20-24 Reps",
+            },
+            {
+              text: "Plank",
+              set: 3 + extraSet,
+              reps: "2 mins",
             },
           ],
         },
