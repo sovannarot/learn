@@ -3,7 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sovannarot Math</title>
+    <title>Sovannarot Math3</title>
+    <link
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/sovannarot/learn/main/assets/img/favicon.jpg"
+      type="image/x-icon"
+    />
+    <link rel="manifest" href="../../manifest.json" />
+    <meta name="theme-color" content="#bd10e0" />
+    <meta
+      name="description"
+      content="SovannarotApp Is A WebApp have a lot of learning skills like flowtime technique, feynman technique. All it can make you learn fast and learn better than normal."
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://raw.githubusercontent.com/sovannarot/learn/main/assets/icon/maskable_icon_x180.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="https://raw.githubusercontent.com/sovannarot/learn/main/assets/icon/maskable_icon_x57.png"
+    />
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700" />
     <script
       id="MathJax-script"
       async
@@ -86,6 +108,7 @@
         <option value="6">ភាគបែង 6</option>
       </select>
       <div class="hide" id="proofSection">
+        <h2 id="extra"></h2>
         <h2 id="zero"></h2>
         <h2 id="first"></h2>
         <h2 id="second"></h2>
@@ -129,6 +152,7 @@
       let bollean = false;
       document.getElementById("proof-button").addEventListener("click", () => {
         if (bollean) {
+          document.getElementById("extra").innerText = "";
           document.getElementById("zero").innerText = "";
           document.getElementById("first").innerText = "";
           document.getElementById("second").innerText = "";
@@ -147,10 +171,8 @@
           return;
         }
         const operation = operationInput.value;
-        const numerator = parseFloat(
-          document.getElementById("numerator").value,
-        );
-        const denominator = parseFloat(
+        let numerator = parseFloat(document.getElementById("numerator").value);
+        let denominator = parseFloat(
           document.getElementById("denominator").value,
         );
         if (isNaN(numerator) || isNaN(denominator) || denominator === 0) {
@@ -160,6 +182,50 @@
         if (numerator < 1) {
           alert("សូមបញ្ចូលលេខត្រឹមត្រូវជាលេខវិជ្ជមាន!");
           return;
+        }
+        if (!Number.isInteger(numerator)) {
+          alert("សូមបញ្ចូលលេខត្រឹមត្រូវជាលេខគត់!");
+          return;
+        }
+        if (denominator === 4) {
+          if (numerator % 2 === 0 && numerator % 4 !== 0) {
+            document.getElementById("extra").innerHTML =
+              operation === "sin"
+                ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+                : operation === "cos"
+                  ? `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`
+                  : operation === "tan"
+                    ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                    : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+            numerator = numerator / 2;
+            denominator = denominator / 2;
+          }
+        }
+        if (denominator === 6) {
+          if (numerator % 2 === 0 && numerator % 3 !== 0) {
+            document.getElementById("extra").innerHTML =
+              operation === "sin"
+                ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+                : operation === "cos"
+                  ? `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`
+                  : operation === "tan"
+                    ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                    : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+            numerator = numerator / 2;
+            denominator = denominator / 2;
+          }
+          if (numerator % 3 === 0 && numerator % 2 !== 0) {
+            document.getElementById("extra").innerHTML =
+              operation === "sin"
+                ? `\\[\\sin (\\frac{${numerator}π}{${denominator}})\\]`
+                : operation === "cos"
+                  ? `\\[\\cos (\\frac{${numerator}π}{${denominator}})\\]`
+                  : operation === "tan"
+                    ? `\\[\\tan (\\frac{${numerator}π}{${denominator}})\\]`
+                    : `\\[\\cot (\\frac{${numerator}π}{${denominator}})\\]`;
+            numerator = numerator / 3;
+            denominator = denominator / 3;
+          }
         }
         let answer =
           operation === "sin"
@@ -200,7 +266,7 @@
               fraction = `\\[\\frac{\\sqrt{3}}{2}\\]`;
             } else if (absAnswer == "0.000000") {
               fraction = `\\[0\\]`;
-            } else if (absAnswer == "1.732050") {
+            } else if (absAnswer == "1.732051") {
               fraction = `\\[\\sqrt{3}\\]`;
             } else if (absAnswer == "0.577350") {
               fraction = `\\[\\frac{\\sqrt{3}}{3}\\]`;
@@ -255,8 +321,8 @@
               document.getElementById("fourth").innerHTML =
                 (numerator - 1) / denominator === 1
                   ? operation === "sin"
-                    ? `\\[\\sin (\\frac{π}{${denominator}})\\]`
-                    : `\\[\\cos (\\frac{π}{${denominator}})\\]`
+                    ? `\\[-\\sin (\\frac{π}{${denominator}})\\]`
+                    : `\\[-\\cos (\\frac{π}{${denominator}})\\]`
                   : operation === "sin"
                     ? `\\[\\sin (${period} \\frac{π}{${denominator}})\\]`
                     : `\\[\\cos (${period} \\frac{π}{${denominator}})\\]`;
@@ -277,6 +343,110 @@
                     ? `\\[-\\sin (\\frac{π}{${denominator}})\\]`
                     : `\\[-\\cos (\\frac{π}{${denominator}})\\]`;
                 document.getElementById("seventh").innerHTML = fraction;
+              }
+            } else if (
+              remainder === denominator - 1 &&
+              (numerator + 1) / denominator > 2
+            ) {
+              const divide =
+                (numerator + 1) / denominator === 1
+                  ? ""
+                  : (numerator + 1) / denominator;
+              const period =
+                ((numerator + 1) / denominator) % 2 === 0
+                  ? "-"
+                  : `${(numerator + 1) / denominator - 1}π + π - `;
+              document.getElementById("second").innerHTML =
+                operation === "sin"
+                  ? `\\[\\sin (\\frac{${
+                      numerator + 1
+                    }π - π}{${denominator}})\\]`
+                  : `\\[\\cos (\\frac{${
+                      numerator + 1
+                    }π - π}{${denominator}})\\]`;
+              document.getElementById("third").innerHTML =
+                operation === "sin"
+                  ? `\\[\\sin (${divide}π - \\frac{π}{${denominator}})\\]`
+                  : `\\[\\cos (${divide}π - \\frac{π}{${denominator}})\\]`;
+              document.getElementById("fourth").innerHTML =
+                (numerator + 1) / denominator === 1
+                  ? operation === "sin"
+                    ? `\\[\\sin (\\frac{π}{${denominator}})\\]`
+                    : `\\[-\\cos (\\frac{π}{${denominator}})\\]`
+                  : operation === "sin"
+                    ? `\\[\\sin (${period} \\frac{π}{${denominator}})\\]`
+                    : `\\[\\cos (${period} \\frac{π}{${denominator}})\\]`;
+              document.getElementById("fifth").innerHTML =
+                (numerator + 1) / denominator === 1
+                  ? fraction
+                  : ((numerator + 1) / denominator) % 2 === 0
+                    ? fraction
+                    : operation === "sin"
+                      ? `\\[\\sin (π - \\frac{π}{${denominator}})\\]`
+                      : `\\[\\cos (π - \\frac{π}{${denominator}})\\]`;
+              if (
+                (numerator + 1) / denominator !== 1 &&
+                ((numerator + 1) / denominator) % 2 !== 0
+              ) {
+                document.getElementById("sixth").innerHTML =
+                  operation === "sin"
+                    ? `\\[\\sin (\\frac{π}{${denominator}})\\]`
+                    : `\\[-\\cos (\\frac{π}{${denominator}})\\]`;
+                document.getElementById("eighth").innerHTML = fraction;
+              }
+            } else if (
+              remainder === denominator - 1 &&
+              (numerator + 1) / denominator < 2
+            ) {
+              const divide =
+                (numerator + 1) / denominator === 1
+                  ? ""
+                  : (numerator + 1) / denominator;
+              const period =
+                ((numerator + 1) / denominator) % 2 === 0
+                  ? "-"
+                  : `${(numerator + 1) / denominator - 1}π + π - `;
+              document.getElementById("second").innerHTML =
+                operation === "sin"
+                  ? `\\[\\sin (\\frac{${
+                      numerator + 1
+                    }π - π}{${denominator}})\\]`
+                  : `\\[\\cos (\\frac{${
+                      numerator + 1
+                    }π - π}{${denominator}})\\]`;
+              document.getElementById("third").innerHTML =
+                operation === "sin"
+                  ? `\\[\\sin (${divide}π - \\frac{π}{${denominator}})\\]`
+                  : `\\[\\cos (${divide}π - \\frac{π}{${denominator}})\\]`;
+              document.getElementById("fourth").innerHTML =
+                (numerator + 1) / denominator === 1
+                  ? operation === "sin"
+                    ? `\\[\\sin (\\frac{π}{${denominator}})\\]`
+                    : `\\[-\\cos (\\frac{π}{${denominator}})\\]`
+                  : operation === "sin"
+                    ? `\\[\\sin (${period} \\frac{π}{${denominator}})\\]`
+                    : `\\[\\cos (${period} \\frac{π}{${denominator}})\\]`;
+              document.getElementById("fifth").innerHTML =
+                (numerator + 1) / denominator === 1
+                  ? fraction
+                  : ((numerator + 1) / denominator) % 2 === 0
+                    ? fraction
+                    : operation === "sin"
+                      ? `\\[\\sin (π - \\frac{π}{${denominator}})\\]`
+                      : `\\[\\cos (π - \\frac{π}{${denominator}})\\]`;
+              if (
+                (numerator + 1) / denominator !== 1 &&
+                ((numerator + 1) / denominator) % 2 !== 0
+              ) {
+                document.getElementById("sixth").innerHTML =
+                  operation === "sin"
+                    ? `\\[-\\sin (-\\frac{π}{${denominator}})\\]`
+                    : `\\[-\\cos (-\\frac{π}{${denominator}})\\]`;
+                document.getElementById("seventh").innerHTML =
+                  operation === "sin"
+                    ? `\\[\\sin (\\frac{π}{${denominator}})\\]`
+                    : `\\[-\\cos (\\frac{π}{${denominator}})\\]`;
+                document.getElementById("eighth").innerHTML = fraction;
               }
             } else {
               const divide =
@@ -666,5 +836,6 @@
         MathJax.typesetPromise();
       });
     </script>
+    <script src="../../service.js"></script>
   </body>
 </html>
