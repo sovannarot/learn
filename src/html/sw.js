@@ -19,7 +19,11 @@ const STATIC_ASSETS = [
   "/src/html/about.html",
   "/src/html/clock.html",
   "/src/html/post.html",
-  "/src/html/daily.html",
+  "/src/html/math.html",
+  "/src/html/math1.html",
+  "/src/html/math2.html",
+  "/src/html/math3.html",
+  "/src/html/math4.html",
 ];
 
 self.addEventListener("install", (event) => {
