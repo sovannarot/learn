@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sovannarot Math</title>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      @font-face {
+        font-family: "Khmer";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://raw.githubusercontent.com/sovannarot/learn/main/assets/font/khmer1.woff2)
+          format("woff2");
+        unicode-range:
+          U+1780-17FF, U+19E0-19FF, U+200C-200D, U+25CC, U+0000-00FF, U+0131,
+          U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+          U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+          U+2215, U+FEFF, U+FFFD;
+      }
+      body {
+        background: white;
+        font-family: "Khmer", sans-serif;
+      }
+      .show {
+        display: flex;
+        flex-direction: column;
+      }
+      .hide {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        width: 100vw;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+      "
+    >
+      <h2>លំហាត់ត្រីកោណមាត្រ</h2>
+      <h2 id="problem"></h2>
+      <button
+        id="generate"
+        style="
+          background: blue;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: larger;
+        "
+      >
+        បង្កើតលីមីត</button
+      ><a
+        href="https://sovannarot.github.io/learn/src/html/mathrot"
+        style="
+          background: blue;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: larger;
+        "
+      >
+        Math List
+      </a>
+    </div>
+    <script>
+      let isRadical1;
+      let isRadical2;
+      let isLinear1;
+      let isLinear2;
+      let a;
+      let b;
+      let c;
+      let d;
+      let e;
+      let f;
+      let approach;
+      document.getElementById("generate").addEventListener("click", () => {
+        isRadical1 = Math.floor(Math.random() * 2) == 0 ? true : false;
+        isRadical2 = Math.floor(Math.random() * 2) == 0 ? true : false;
+        isLinear1 = Math.floor(Math.random() * 2) == 0 ? true : false;
+        isLinear2 = Math.floor(Math.random() * 2) == 0 ? true : false;
+        a = Math.floor(Math.random() * 41) - 20;
+        a = a == 0 ? 2 : a;
+        approach = Math.floor(Math.random() * 41) - 20;
+        b = Math.floor(Math.random() * 21) - a * approach;
+        c = approach * (Math.floor(Math.random() * 41) - 20);
+        d = Math.floor(Math.random() * 41) - 20;
+        d = d == 0 ? 2 : d;
+        e = Math.floor(Math.random() * 21) - d * approach;
+        f = approach * (Math.floor(Math.random() * 41) - 20);
+        let am = a == 1 ? "x" : a == -1 ? "-x" : a + "x";
+        let dm = d == 1 ? "x" : d == -1 ? "-x" : d + "x";
+        function modify(b) {
+          return b < 0 ? b : b == 0 ? "" : `+${b}`;
+        }
+        let bm = modify(b);
+        let em = modify(e);
+        if (isRadical1) {
+          if (a * approach + b == 0) {
+            b += 1;
+          }
+        }
+        if (isRadical2) {
+          if (d * approach + e == 0) {
+            e += 1;
+          }
+        }
+        let e1 = Number.isInteger(Math.sqrt(a * approach + b))
+          ? Math.sqrt(a * approach + b)
+          : `\\sqrt{${a * approach + b}}`;
+        let e2 = Number.isInteger(Math.sqrt(d * approach + e))
+          ? Math.sqrt(d * approach + e)
+          : `\\sqrt{${d * approach + e}}`;
+        let middle1;
+        let middle2;
+        if (a * approach + c / approach < 0) {
+          if (a * approach + c / approach == -1) {
+            middle1 = "+x";
+          } else {
+            middle1 = `+${-(a * approach + c / approach)}x`;
+          }
+        } else if (a * approach + c / approach > 0) {
+          if (a * approach + c / approach == 1) {
+            middle1 = "-x";
+          } else {
+            middle1 = `${-(a * approach + c / approach)}x`;
+          }
+        } else {
+          middle1 = "";
+        }
+        if (d * approach + f / approach < 0) {
+          if (d * approach + f / approach == -1) {
+            middle2 = "+x";
+          } else {
+            middle2 = `+${-(d * approach + f / approach)}x`;
+          }
+        } else if (d * approach + f / approach > 0) {
+          if (d * approach + f / approach == 1) {
+            middle2 = "-x";
+          } else {
+            middle2 = `${-(d * approach + f / approach)}x`;
+          }
+        } else {
+          middle2 = "";
+        }
+        let am1 = a == 1 ? "x^2" : a == -1 ? "-x^2" : a + "x^2";
+        let dm1 = d == 1 ? "x^2" : d == -1 ? "-x^2" : d + "x^2";
+        let upper = isRadical1
+          ? `\\sqrt{${am}${bm}} - ${e1}`
+          : isLinear1
+            ? am + modify(-(a * approach))
+            : am1 + middle1 + modify(c);
+        let downer = isRadical2
+          ? `\\sqrt{${dm}${em}} - ${e2}`
+          : isLinear2
+            ? dm + modify(-(d * approach))
+            : dm1 + middle2 + modify(f);
+        document.getElementById("problem").innerHTML =
+          `\\[\\lim_{x\\to\\ ${approach}} \\frac{${upper}}{${downer}}\\]`;
+        MathJax.typesetPromise();
+      });
+    </script>
+  </body>
+</html>
