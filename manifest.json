@@ -86,6 +86,18 @@
       ]
     },
     {
+      "name": "Mathrot: Math Learning",
+      "short_name": "Mathrot",
+      "description": "Mathrot is a math learning website that provides interactive lessons, practice problems, and resources to help students of all levels improve their math skills.",
+      "url": "/learn/src/html/mathrot.html",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/sovannarot/learn/main/assets/icon/71be49e9ae24fde63c3336c4d5fa945e.jpg",
+          "sizes": "980x980"
+        }
+      ]
+    },
+    {
       "name": "Flowtime Technique Timer",
       "short_name": "Flowtime Timer",
       "description": "Clock to Calculate time to focus and take the brake",
