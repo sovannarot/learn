@@ -19,7 +19,7 @@ const STATIC_ASSETS = [
   "/src/html/about.html",
   "/src/html/clock.html",
   "/src/html/post.html",
-  "/src/html/math.html",
+  "/src/html/mathrot.html",
   "/src/html/math1.html",
   "/src/html/math2.html",
   "/src/html/math3.html",
