@@ -1,44 +1,121 @@
-var cacheName = "v2";
-var dynamiccacheName = "v1";
-const assets = [
+const CACHE_VERSION = "v4";
+const STATIC_CACHE = `learn-static-${CACHE_VERSION}`;
+const RUNTIME_CACHE = `learn-runtime-${CACHE_VERSION}`;
+const STATIC_ASSETS = [
   "/",
   "/index.html",
-  "/src/js/index.js",
-  "/src/css/index.css",
+  "/daily.html",
+  "/manifest.json",
   "/service.js",
   "/sw.js",
+  "/src/css/index.css",
+  "/src/js/index.js",
+  "/src/css/about.css",
+  "/src/js/about.js",
+  "/src/css/clock.css",
+  "/src/js/clock.js",
+  "/src/css/post.css",
+  "/src/js/post.js",
+  "/src/html/about.html",
+  "/src/html/clock.html",
+  "/src/html/post.html",
+  "/src/html/daily.html",
 ];
-self.addEventListener("install", (e) => {
-  console.log("service worker has been installed");
-  e.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      cache.addAll(assets);
-    })
+
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
+  event.waitUntil(
+    caches
+      .open(STATIC_CACHE)
+      .then((cache) => cache.addAll(STATIC_ASSETS))
+      .catch((err) => console.error("SW install failed", err)),
   );
 });
-self.addEventListener("active", (e) => {
-  console.log("service worker has been actived");
-  e.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter((key) => key !== cacheName).map((key) => caches.delete(key))
-      );
-    })
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== STATIC_CACHE && key !== RUNTIME_CACHE)
+            .map((key) => caches.delete(key)),
+        ),
+      )
+      .then(() => self.clients.claim()),
   );
 });
-self.addEventListener("fetch", (e) => {
-  console.log("service worker has been fetched");
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return (
-        response ||
-        fetch(e.request).then(async (fetchRes) => {
-          return caches.open(dynamiccacheName).then((cache) => {
-            cache.put(e.request.url, fetchRes.clone());
-            return fetchRes;
-          });
-        })
-      );
-    })
+
+self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") {
+    return;
+  }
+
+  const requestUrl = new URL(event.request.url);
+  const isNavigation = event.request.mode === "navigate";
+  const isStaticAsset = STATIC_ASSETS.some(
+    (asset) => requestUrl.pathname === asset,
+  );
+
+  if (isNavigation) {
+    event.respondWith(networkFirst(event.request));
+    return;
+  }
+
+  if (
+    isStaticAsset ||
+    event.request.destination === "style" ||
+    event.request.destination === "script" ||
+    event.request.destination === "image" ||
+    event.request.destination === "font"
+  ) {
+    event.respondWith(cacheFirst(event.request));
+    return;
+  }
+
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      return cachedResponse || fetchAndCache(event.request);
+    }),
   );
 });
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+async function cacheFirst(request) {
+  const cachedResponse = await caches.match(request);
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+  return fetchAndCache(request);
+}
+
+async function networkFirst(request) {
+  try {
+    const response = await fetch(request);
+    const cache = await caches.open(RUNTIME_CACHE);
+    cache.put(request, response.clone());
+    return response;
+  } catch (err) {
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    return new Response("Offline", {
+      status: 503,
+      statusText: "Service Unavailable",
+    });
+  }
+}
+
+async function fetchAndCache(request) {
+  const response = await fetch(request);
+  const cache = await caches.open(RUNTIME_CACHE);
+  cache.put(request, response.clone());
+  return response;
+}
